@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import emailjs from 'emailjs-com';
 import logo from './logo.svg';
 import './App.css';
+import { GooglePlayButton, AppStoreButton, ButtonsContainer } from "react-mobile-app-button";
 
 function App() {
   const [email, setEmail] = useState('');
@@ -48,6 +49,8 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>LANDING PAGE</p>
+      </header>
+      <main>
         <form className="email-form" onSubmit={sendEmail}>
           <label>
             Email:
@@ -62,7 +65,18 @@ function App() {
           </label>
           <button type="submit">Enter</button>
         </form>
-      </header>
+      <ButtonsContainer>
+      <GooglePlayButton
+        theme={"dark"}
+        className={"custom-style"}
+      />
+
+      <AppStoreButton
+        theme={"dark"}
+        className={"custom-style"}
+      />
+    </ButtonsContainer>
+      </main>
     </div>
   );
 }
