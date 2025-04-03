@@ -4,8 +4,10 @@ import { GooglePlayButton, AppStoreButton, ButtonsContainer } from "react-mobile
 import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa';
 
 function App() {
-  const appStoreUrl = "https://apps.apple.com/"; // à remplacer par ton vrai lien
-  const googlePlayUrl = "https://play.google.com/store/apps"; // à remplacer aussi
+  // const appStoreUrl = "https://apps.apple.com/"; // à remplacer par ton vrai lien
+  // const googlePlayUrl = "https://play.google.com/store/apps"; // à remplacer aussi
+  const appStoreUrl = "/"; // à remplacer par ton vrai lien
+  const googlePlayUrl = "/"; // à remplacer aussi
 
   const [formData, setFormData] = useState({ email: '' });
   const [status, setStatus] = useState(null);
@@ -31,8 +33,10 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col">
       <nav className="bg-[#2E4E9C] px-8 py-4 flex justify-between items-center">
-        <div className="text-white text-xl font-semibold">Logo</div>
-        <ul className="flex space-x-8 items-center">
+        <div className="text-white text-xl font-semibold">
+          <img src="/img/LOGO-SYMBOLE.png" alt="Logo symbole" className="w-[6.5rem] h-[6.5rem] ml-5" />
+        </div>
+        <ul className="flex space-x-8 items-center text-lg">
           <li className="text-white cursor-pointer hover:text-gray-300">Accueil</li>
           <li className="text-white cursor-pointer hover:text-gray-300">Découvrir</li>
           <li className="text-white cursor-pointer hover:text-gray-300">L'Application</li>
@@ -105,7 +109,7 @@ function App() {
       </section>
 
       {/* Section Présentation App */}
-      <section className="bg-white py-24">
+      <section className="bg-white pb-24">
         <div className="max-w-7xl mx-auto px-8 grid md:grid-cols-2 gap-16 items-center">
           <div>
             <h2 className="text-3xl font-semibold mb-6">Qu’est-ce que HoopSphère?</h2>
