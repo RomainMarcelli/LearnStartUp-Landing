@@ -1,8 +1,12 @@
 import React from 'react';
+import { GooglePlayButton, AppStoreButton, ButtonsContainer } from "react-mobile-app-button";
 
 function App() {
+  const appStoreUrl = "https://apps.apple.com/"; // à remplacer par ton vrai lien
+  const googlePlayUrl = "https://play.google.com/store/apps"; // à remplacer aussi
+
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
+    <div className="min-h-screen flex flex-col">
       <nav className="bg-[#2E4E9C] px-8 py-4 flex justify-between items-center">
         <div className="text-white text-xl font-semibold">Logo</div>
         <ul className="flex space-x-8 items-center">
@@ -17,24 +21,65 @@ function App() {
         </ul>
       </nav>
       <div
-        className="flex-1 bg-cover bg-center text-white px-8 py-16"
+        className="flex-1 bg-cover bg-center text-white relative"
         style={{ backgroundImage: "url('/img/img_back.jpg')" }}
       >
-        <div className="max-w-3xl">
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
-            HoopSphère : L’APPLI POUR LES PASSIONNÉS DE BASKET !
-          </h1>
-          <p className="text-lg mb-8">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor,
-            dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula
-            massa, varius a, semper congue, euismod non, mi.
-          </p>
-          <div className="flex space-x-4">
-            <img src="/img/google-play-badge.png" alt="Google Play" className="h-12" />
-            <img src="/img/app-store-badge.png" alt="App Store" className="h-12" />
+        <div className="absolute top-0 left-0 right-0 h-64 bg-gradient-to-b from-[#2E4E9C]/80 to-transparent z-0"></div>
+        <div className="max-w-7xl mx-auto px-8 py-24 grid md:grid-cols-2 gap-8 items-center relative z-10">
+          <div>
+            <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
+              HoopSphère : L’APPLI POUR LES PASSIONNÉS DE BASKET !
+            </h1>
+            <p className="text-lg mb-8">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor,
+              dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula
+              massa, varius a, semper congue, euismod non, mi.
+            </p>
+            <div className="flex space-x-4">
+              <GooglePlayButton url={googlePlayUrl} theme="dark" width={180} height={60} />
+              <AppStoreButton url={appStoreUrl} theme="dark" width={180} height={60} />
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Section Joueurs / Entraîneurs / Clubs */}
+      <section className="bg-white py-20">
+        <div className="max-w-7xl mx-auto px-8 flex flex-wrap justify-around gap-8">
+          {/* Joueurs */}
+          <div className="relative w-[320px] h-[400px] rounded-[24.3px] overflow-hidden shadow-lg bg-cover bg-[24%_30%]" style={{ backgroundImage: "url('/img/joueur.jpg')" }}>
+            <div className="absolute inset-0 bg-black/40 z-10 flex flex-col justify-between p-6 text-white">
+              <h3 className="text-2xl text-center font-semibold">Joueurs</h3>
+              <p className="text-sm text-left">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor,
+                dignissim sit
+              </p>
+            </div>
+          </div>
+
+          {/* Entraîneurs */}
+          <div className="relative w-[320px] h-[400px] rounded-[24.3px] overflow-hidden shadow-lg bg-cover bg-[22%_30%]" style={{ backgroundImage: "url('/img/coach.jpg')" }}>
+            <div className="absolute inset-0 bg-black/40 z-10 flex flex-col justify-between p-6 text-white">
+              <h3 className="text-2xl text-center font-semibold">Entraîneurs</h3>
+              <p className="text-sm text-left">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor,
+                dignissim sit
+              </p>
+            </div>
+          </div>
+
+          {/* Clubs */}
+          <div className="relative w-[320px] h-[400px] rounded-[24.3px] overflow-hidden shadow-lg bg-cover bg-center" style={{ backgroundImage: "url('/img/club.jpg')" }}>
+            <div className="absolute inset-0 bg-black/40 z-10 flex flex-col justify-between p-6 text-white">
+              <h3 className="text-2xl text-center font-semibold">Clubs</h3>
+              <p className="text-sm text-left">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor,
+                dignissim sit
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
