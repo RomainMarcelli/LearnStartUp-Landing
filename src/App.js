@@ -1,9 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
+import emailjs from 'emailjs-com';
 import { GooglePlayButton, AppStoreButton, ButtonsContainer } from "react-mobile-app-button";
 
 function App() {
   const appStoreUrl = "https://apps.apple.com/"; // à remplacer par ton vrai lien
   const googlePlayUrl = "https://play.google.com/store/apps"; // à remplacer aussi
+
+  const [formData, setFormData] = useState({ email: '' });
+  const [status, setStatus] = useState(null);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .send(
+        'service_l763e7g',
+        'template_gqw8am9',
+        formData,
+        'Iw-kl6b1kOYSMatcX'
+      )
+      .then(
+        () => setStatus('Merci pour votre inscription !'),
+        () => setStatus("Une erreur s'est produite. Réessayez.")
+      );
+
+    setFormData({ email: '' });
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -113,6 +135,31 @@ function App() {
           <button className="bg-[#F56B1E] text-white px-8 py-3 text-lg rounded-xl hover:bg-orange-600 transition-colors">
             Télécharger
           </button>
+        </div>
+      </section>
+      <section className="bg-gradient-to-r from-[#2E4E9C] to-[#1A1A2E] py-20 text-white">
+      <div className="max-w-3xl mx-auto text-center px-6">
+          <h2 className="text-3xl font-bold mb-4">Abonnez-vous à notre newsletter</h2>
+          <p className="mb-6 text-lg">
+            Recevez les dernières actualités, événements et nouveautés de HoopSphère directement dans votre boîte mail.
+          </p>
+          <form onSubmit={handleSubmit} className="flex flex-col md:flex-row items-center justify-center gap-4">
+            <input
+              type="email"
+              required
+              placeholder="Votre adresse email"
+              value={formData.email}
+              onChange={(e) => setFormData({ email: e.target.value })}
+              className="px-4 py-3 rounded-md w-full md:w-80 text-black focus:outline-none"
+            />
+            <button
+              type="submit"
+              className="bg-[#F56B1E] px-6 py-3 rounded-md hover:bg-orange-600 transition-colors"
+            >
+              S'abonner
+            </button>
+          </form>
+          {status && <p className="mt-4 text-sm">{status}</p>}
         </div>
       </section>
     </div>
