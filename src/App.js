@@ -32,7 +32,7 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <nav className="bg-[#2E4E9C] px-8 py-4 flex justify-between items-center">
+      <nav className="bg-[#2E4E9C] px-8 flex justify-between items-center sticky top-0 z-50">
         <div className="text-white text-xl font-semibold">
           <img src="/img/LOGO-SYMBOLE.png" alt="Logo symbole" className="w-[6.5rem] h-[6.5rem] ml-5" />
         </div>
@@ -48,11 +48,11 @@ function App() {
         </ul>
       </nav>
       <div
-        className="flex-1 bg-cover bg-center text-white relative"
+        className="flex-1 bg-cover bg-center text-white relative bg-fixed"
         style={{ backgroundImage: "url('/img/img_back.jpg')" }}
       >
-        <div className="absolute top-0 left-0 right-0 h-64 bg-gradient-to-b from-[#2E4E9C]/80 to-transparent z-0"></div>
-        <div className="max-w-7xl mx-auto px-8 py-24 grid md:grid-cols-2 gap-8 items-center relative z-10">
+        <div className="absolute top-0 left-0 right-0 h-64 bg-gradient-to-b from-[#2E4E9C] to-transparent z-0"></div>
+        <div className="max-w-7xl mx-auto px-8 py-24 grid md:grid-cols-2 gap-8 items-center relative z-10 h-screen">
           <div>
             <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
               HoopSphère : L’APPLI POUR LES PASSIONNÉS DE BASKET !
@@ -118,8 +118,13 @@ function App() {
             </p>
           </div>
           <div className="flex justify-center gap-6">
-            <img src="/img/iphone.png" alt="Phone 1" className="w-[33rem]" />
+            <img
+              src="/img/iphone.png"
+              alt="Phone 1"
+              className="w-[33rem] animate-float"
+            />
           </div>
+
         </div>
       </section>
 
@@ -128,7 +133,7 @@ function App() {
         className="relative text-white h-[717px]"
       >
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0 bg-cover bg-center bg-fixed"
           style={{ backgroundImage: "url('/img/panier.jpg')" }}
         ></div>
         <div className="absolute inset-0 bg-[#151414B2]"></div>
@@ -176,10 +181,10 @@ function App() {
           </div>
 
           {/* Liens au centre */}
-          <ul className="space-y-2 text-sm md:text-base text-white/90">
-            <li className="hover:text-white cursor-pointer">Mentions Légales</li>
-            <li className="hover:text-white cursor-pointer">Conditions d’utilisation</li>
-            <li className="hover:text-white cursor-pointer">Politique de confidentialité</li>
+          <ul className="stext-sm md:text-base text-white/90 flex w-max">
+            <li className="hover:text-white cursor-pointer">Mentions Légales </li>
+            <li className="hover:text-white cursor-pointer px-5">Conditions d’utilisation</li>
+            <li className="hover:text-white cursor-pointer"> Politique de confidentialité</li>
           </ul>
 
           {/* Réseaux à droite */}
