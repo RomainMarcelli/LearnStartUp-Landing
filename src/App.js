@@ -1,82 +1,40 @@
-import React, { useState } from 'react';
-import emailjs from 'emailjs-com';
-import logo from './logo.svg';
-import './App.css';
-import { GooglePlayButton, AppStoreButton, ButtonsContainer } from "react-mobile-app-button";
+import React from 'react';
 
 function App() {
-  const [email, setEmail] = useState('');
-
-  const handleChange = (e) => {
-    setEmail(e.target.value); // Met à jour directement la variable email
-  };
-
-  const sendEmail = (e) => {
-    e.preventDefault();
-
-    if (!email) {
-      alert('Please enter your email address.');
-      return;
-    }
-
-    const formData = { user_email: email };
-
-    console.log('Sending email with data:', formData);
-
-    emailjs
-      .send(
-        'service_l763e7g', // Remplacez par votre service ID EmailJS
-        'template_gqw8am9', // Remplacez par votre template ID EmailJS
-        formData,
-        'Iw-kl6b1kOYSMatcX' // Remplacez par votre user ID EmailJS (clé publique)
-      )
-      .then(
-        (result) => {
-          console.log('Email sent successfully:', result.text);
-          alert('Email sent successfully!');
-        },
-        (error) => {
-          console.error('Error sending email:', error);
-          alert(`Failed to send email. Error: ${error.text}`);
-        }
-      );
-
-    setEmail(''); // Réinitialise l'email après l'envoi
-  };
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>LANDING PAGE</p>
-      </header>
-      <main>
-        <form className="email-form" onSubmit={sendEmail}>
-          <label>
-            Email:
-            <input
-              type="email"
-              name="user_email"
-              value={email}
-              onChange={handleChange}
-              placeholder="Enter your email"
-              required
-            />
-          </label>
-          <button type="submit">Enter</button>
-        </form>
-      <ButtonsContainer>
-      <GooglePlayButton
-        theme={"dark"}
-        className={"custom-style"}
-      />
-
-      <AppStoreButton
-        theme={"dark"}
-        className={"custom-style"}
-      />
-    </ButtonsContainer>
-      </main>
+    <div className="min-h-screen bg-gray-100 flex flex-col">
+      <nav className="bg-[#2E4E9C] px-8 py-4 flex justify-between items-center">
+        <div className="text-white text-xl font-semibold">Logo</div>
+        <ul className="flex space-x-8 items-center">
+          <li className="text-white cursor-pointer hover:text-gray-300">Accueil</li>
+          <li className="text-white cursor-pointer hover:text-gray-300">Découvrir</li>
+          <li className="text-white cursor-pointer hover:text-gray-300">L'Application</li>
+          <li>
+            <button className="bg-[#F56B1E] text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors">
+              Télécharger
+            </button>
+          </li>
+        </ul>
+      </nav>
+      <div
+        className="flex-1 bg-cover bg-center text-white px-8 py-16"
+        style={{ backgroundImage: "url('/img/img_back.jpg')" }}
+      >
+        <div className="max-w-3xl">
+          <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
+            HoopSphère : L’APPLI POUR LES PASSIONNÉS DE BASKET !
+          </h1>
+          <p className="text-lg mb-8">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor,
+            dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula
+            massa, varius a, semper congue, euismod non, mi.
+          </p>
+          <div className="flex space-x-4">
+            <img src="/img/google-play-badge.png" alt="Google Play" className="h-12" />
+            <img src="/img/app-store-badge.png" alt="App Store" className="h-12" />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
