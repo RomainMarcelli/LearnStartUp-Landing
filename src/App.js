@@ -82,22 +82,37 @@ function App() {
       </section>
 
       {/* Section Présentation App */}
-      {/* Section Présentation App */}
       <section className="bg-white py-24">
         <div className="max-w-7xl mx-auto px-8 grid md:grid-cols-2 gap-16 items-center">
           <div>
             <h2 className="text-3xl font-semibold mb-6">Qu’est-ce que HoopSphère?</h2>
             <p className="text-gray-800 text-lg">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet massa condimentum, tempor odio vel,
-              tristique turpis. Quisque blandit libero sit amet justo facilisis, sed porta metus consectetur. Nulla a diam
-              sem. Fusce rutrum ipsum sem, eu aliquet ex elementum ac. Nullam nibh ante, condimentum eget rhoncus id,
-              consequat eu neque. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-              himenaeos
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet massa condimentum, tempor odio vel, tristique turpis. Quisque blandit libero sit amet justo facilisis, sed porta metus consectetur. Nulla a diam sem. Fusce rutrum ipsum sem, eu aliquet ex elementum ac. Nullam nibh ante, condimentum eget rhoncus id, consequat eu neque. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos
             </p>
           </div>
           <div className="flex justify-center gap-6">
-          <img src="/img/iphone.png" alt="Phone 1" className="w-[33rem]" />
+            <img src="/img/iphone.png" alt="Phone 1" className="w-[33rem]" />
           </div>
+        </div>
+      </section>
+
+      {/* Section Téléchargement CTA */}
+      <section
+        className="relative text-white h-[717px]"
+      >
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('/img/panier.jpg')" }}
+        ></div>
+        <div className="absolute inset-0 bg-[#151414B2]"></div>
+        <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4">
+          <h2 className="text-3xl md:text-4xl font-semibold mb-6">Téléchargez votre application HoopSphère</h2>
+          <p className="text-lg mb-8 max-w-xl">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet massa condimentum, tempor odio vel, tristique turpis.
+          </p>
+          <button className="bg-[#F56B1E] text-white px-8 py-3 text-lg rounded-xl hover:bg-orange-600 transition-colors">
+            Télécharger
+          </button>
         </div>
       </section>
     </div>
