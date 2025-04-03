@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import emailjs from 'emailjs-com';
 import { GooglePlayButton, AppStoreButton, ButtonsContainer } from "react-mobile-app-button";
+import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa';
 
 function App() {
   const appStoreUrl = "https://apps.apple.com/"; // à remplacer par ton vrai lien
@@ -138,7 +139,7 @@ function App() {
         </div>
       </section>
       <section className="bg-gradient-to-r from-[#2E4E9C] to-[#1A1A2E] py-20 text-white">
-      <div className="max-w-3xl mx-auto text-center px-6">
+        <div className="max-w-3xl mx-auto text-center px-6">
           <h2 className="text-3xl font-bold mb-4">Abonnez-vous à notre newsletter</h2>
           <p className="mb-6 text-lg">
             Recevez les dernières actualités, événements et nouveautés de HoopSphère directement dans votre boîte mail.
@@ -162,6 +163,40 @@ function App() {
           {status && <p className="mt-4 text-sm">{status}</p>}
         </div>
       </section>
+      <footer className="bg-[#151415] text-white">
+        <div className="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-3 items-center text-center gap-6">
+
+          {/* Logo à gauche */}
+          <div className="flex justify-center md:justify-start">
+            <img src="/img/LOGO-V.png" alt="HoopSphère Logo" className="w-52 object-contain" />
+          </div>
+
+          {/* Liens au centre */}
+          <ul className="space-y-2 text-sm md:text-base text-white/90">
+            <li className="hover:text-white cursor-pointer">Mentions Légales</li>
+            <li className="hover:text-white cursor-pointer">Conditions d’utilisation</li>
+            <li className="hover:text-white cursor-pointer">Politique de confidentialité</li>
+          </ul>
+
+          {/* Réseaux à droite */}
+          <div className="flex justify-center md:justify-end space-x-6">
+            <a href="#" aria-label="Facebook" className="hover:text-gray-300 text-4xl">
+              <FaFacebookF />
+            </a>
+            <a href="#" aria-label="Instagram" className="hover:text-gray-300 text-4xl">
+              <FaInstagram />
+            </a>
+            <a href="#" aria-label="Twitter" className="hover:text-gray-300 text-4xl">
+              <FaTwitter />
+            </a>
+          </div>
+        </div>
+
+        {/* Copyright */}
+        <div className="bg-[#151415] text-center py-4 text-sm text-white/80">
+          © {new Date().getFullYear()} HoopSphère — Tous droits réservés.
+        </div>
+      </footer>
     </div>
   );
 }
