@@ -63,7 +63,7 @@ function App() {
               required
             />
           </label>
-          <button type="submit">Enter</button>
+          <button type="submit">Entrer</button>
         </form>
       <ButtonsContainer>
       <GooglePlayButton
