@@ -76,15 +76,17 @@ function App() {
 
 {/* SECTION HERO */}
 <div
-  className="w-full bg-no-repeat bg-cover text-white relative"
+  className="w-full h-screen bg-no-repeat bg-cover text-white relative flex items-center"
   style={{
     backgroundImage: "url('/img/img_back.jpg')",
-    backgroundPosition: 'center top', // Change ici : 'center', 'top', 'bottom', 'left 20%', etc.
+    backgroundPosition: 'center top', // ajuste à ta guise
   }}
 >
+  {/* Dégradé */}
   <div className="absolute top-0 left-0 right-0 h-64 bg-gradient-to-b from-[#2E4E9C] to-transparent z-0" />
 
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 mt-[70px] md:mt-0 md:px-8 py-16 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-10 items-center relative z-10">
+  {/* Contenu */}
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10 transform -translate-y-10 md:-translate-y-16">
     <div>
       <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6">
         HoopSphère : L’APPLI POUR LES PASSIONNÉS DE BASKET !
@@ -210,10 +212,10 @@ function App() {
     </div>
 
     {/* Liens au centre */}
-    <ul className="flex flex-col sm:flex-row text-center sm:justify-center items-center sm:items-start gap-2 sm:gap-5 text-sm md:text-base text-white/90">
-      <li className="hover:text-white cursor-pointer">Mentions Légales</li>
-      <li className="hover:text-white cursor-pointer">Conditions d’utilisation</li>
-      <li className="hover:text-white cursor-pointer">Politique de confidentialité</li>
+    <ul className="w-full flex flex-col sm:flex-row sm:justify-center items-center gap-2 sm:gap-6 text-sm md:text-base text-white/90 text-center">
+      <li className="hover:text-white cursor-pointer w-full sm:w-auto whitespace-nowrap">Mentions Légales</li>
+      <li className="hover:text-white cursor-pointer w-full sm:w-auto whitespace-nowrap">Conditions d’utilisation</li>
+      <li className="hover:text-white cursor-pointer w-full sm:w-auto whitespace-nowrap">Politique de confidentialité</li>
     </ul>
 
     {/* Réseaux à droite */}
