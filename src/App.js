@@ -34,9 +34,9 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <nav className="bg-[#2E4E9C] px-8 py-4 flex justify-between items-center sticky top-0 z-50">
+      <nav className="bg-[#2E4E9C] px-8 pt-2 flex justify-between items-center sticky top-0 z-50">
   <div className="text-white text-xl font-semibold flex items-center justify-between w-full md:w-auto">
-    <img src="/img/LOGO-SYMBOLE.png" alt="Logo symbole" className="w-[6.5rem] h-[6.5rem] ml-5" />
+    <img src="/img/LOGO-SYMBOLE.png" alt="Logo symbole" className="w-[4.5rem] h-[4.5rem] ml-5" />
     
     {/* Burger Icon (visible en mobile) */}
     <button
@@ -48,7 +48,7 @@ function App() {
   </div>
 
   {/* Menu Desktop */}
-  <ul className="hidden md:flex space-x-8 items-center text-lg">
+  <ul className="hidden md:flex space-x-8 items-center text-base">
     <li className="text-white cursor-pointer hover:text-gray-300">Accueil</li>
     <li className="text-white cursor-pointer hover:text-gray-300">Découvrir</li>
     <li className="text-white cursor-pointer hover:text-gray-300">L'Application</li>
@@ -204,29 +204,29 @@ function App() {
         </div>
       </section>
       <footer className="bg-[#151415] text-white">
-  <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 text-center sm:text-left items-center">
-    
-    {/* Logo à gauche */}
-    <div className="flex justify-center sm:justify-start">
-      <img src="/img/LOGO-V.png" alt="HoopSphère Logo" className="w-40 sm:w-52 object-contain" />
+  <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 text-center items-center">
+
+    {/* Logo centré */}
+    <div className="flex justify-center">
+      <img src="/img/LOGO-V.png" alt="HoopSphère Logo" className="w-24 sm:w-32 object-contain" />
     </div>
 
     {/* Liens au centre */}
-    <ul className="w-full flex flex-col sm:flex-row sm:justify-center items-center gap-2 sm:gap-6 text-sm md:text-base text-white/90 text-center">
+    <ul className="w-full flex flex-col sm:flex-row sm:justify-center items-center gap-2 sm:gap-4 text-xs sm:text-sm text-white/90 text-center">
       <li className="hover:text-white cursor-pointer w-full sm:w-auto whitespace-nowrap">Mentions Légales</li>
       <li className="hover:text-white cursor-pointer w-full sm:w-auto whitespace-nowrap">Conditions d’utilisation</li>
       <li className="hover:text-white cursor-pointer w-full sm:w-auto whitespace-nowrap">Politique de confidentialité</li>
     </ul>
 
-    {/* Réseaux à droite */}
-    <div className="flex justify-center sm:justify-end space-x-6">
-      <a href="#" aria-label="Facebook" className="hover:text-gray-300 text-3xl">
+    {/* Réseaux centré */}
+    <div className="flex justify-center space-x-4">
+      <a href="#" aria-label="Facebook" className="hover:text-gray-300 text-2xl">
         <FaFacebookF />
       </a>
-      <a href="#" aria-label="Instagram" className="hover:text-gray-300 text-3xl">
+      <a href="#" aria-label="Instagram" className="hover:text-gray-300 text-2xl">
         <FaInstagram />
       </a>
-      <a href="#" aria-label="Twitter" className="hover:text-gray-300 text-3xl">
+      <a href="#" aria-label="Twitter" className="hover:text-gray-300 text-2xl">
         <FaTwitter />
       </a>
     </div>
