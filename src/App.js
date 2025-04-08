@@ -13,6 +13,7 @@ function App() {
   const [formData, setFormData] = useState({ email: '' });
   const [status, setStatus] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,73 +36,71 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col">
       <nav className="bg-[#2E4E9C] px-8 pt-2 flex justify-between items-center sticky top-0 z-50">
-  <div className="text-white text-xl font-semibold flex items-center justify-between w-full md:w-auto">
-    <img src="/img/LOGO-SYMBOLE.png" alt="Logo symbole" className="w-[4.5rem] h-[4.5rem] ml-5" />
-    
-    {/* Burger Icon (visible en mobile) */}
-    <button
-      className="md:hidden text-white text-3xl focus:outline-none pr-4"
-      onClick={() => setIsMenuOpen(!isMenuOpen)}
-    >
-      {isMenuOpen ? <FaTimes /> : <FaBars />}
-    </button>
-  </div>
+        <div className="text-white text-xl font-semibold flex items-center justify-between w-full md:w-auto">
+          <img src="/img/LOGO-SYMBOLE.png" alt="Logo symbole" className="w-[4.5rem] h-[4.5rem] ml-5" />
+        </div>
 
-  {/* Menu Desktop */}
-  <ul className="hidden md:flex space-x-8 items-center text-base">
-    <li className="text-white cursor-pointer hover:text-gray-300">Accueil</li>
-    <li className="text-white cursor-pointer hover:text-gray-300">Découvrir</li>
-    <li className="text-white cursor-pointer hover:text-gray-300">L'Application</li>
-    <li>
-      <button className="bg-[#F56B1E] text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors">
-        Télécharger
-      </button>
-    </li>
-  </ul>
+        {/* Menu Desktop */}
+        <ul className="hidden md:flex space-x-8 items-center text-base">
+          <li>
+            <div
+              className={`p-[2px] rounded-full inline-block transition-all duration-300 ${hovered
+                  ? 'bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400'
+                  : 'bg-gradient-to-r from-gray-400 via-[#7885f2] to-sky-400'
+                }`}
+            >
+              <button
+                onMouseEnter={() => setHovered(true)}
+                onMouseLeave={() => setHovered(false)}
+                className={`relative w-[280px] h-[48px] rounded-full text-white font-bold overflow-hidden flex items-center justify-center transition-colors duration-300 ${hovered ? 'bg-[#F56B1E]' : 'bg-[#1b1b1b]'
+                  }`}
+              >
+                <span
+                  className={`absolute transition-all duration-500 ${hovered ? 'translate-y-0 opacity-100' : '-translate-y-10 opacity-0'
+                    }`}
+                >
+                  Commencer HoopSphère
+                </span>
+                <span
+                  className={`absolute transition-all duration-500 ${hovered ? 'translate-y-10 opacity-0' : 'translate-y-0 opacity-100'
+                    }`}
+                >
+                  Télécharger l'application
+                </span>
+              </button>
+            </div>
+          </li>
+        </ul>
+      </nav>
 
-  {/* Menu Mobile */}
-  {isMenuOpen && (
-    <ul className="absolute top-full left-0 w-full bg-[#2E4E9C] text-white flex flex-col space-y-4 py-6 px-8 md:hidden z-40">
-      <li className="cursor-pointer hover:text-gray-300">Accueil</li>
-      <li className="cursor-pointer hover:text-gray-300">Découvrir</li>
-      <li className="cursor-pointer hover:text-gray-300">L'Application</li>
-      <li>
-        <button className="bg-[#F56B1E] text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors text-left">
-          Télécharger
-        </button>
-      </li>
-    </ul>
-  )}
-</nav>
+      {/* SECTION HERO */}
+      <div
+        className="w-full h-screen bg-no-repeat bg-cover text-white relative flex items-center"
+        style={{
+          backgroundImage: "url('/img/img_back.jpg')",
+          backgroundPosition: 'center top', // ajuste à ta guise
+        }}
+      >
+        {/* Dégradé */}
+        <div className="absolute top-0 left-0 right-0 h-64 bg-gradient-to-b from-[#2E4E9C] to-transparent z-0" />
 
-{/* SECTION HERO */}
-<div
-  className="w-full h-screen bg-no-repeat bg-cover text-white relative flex items-center"
-  style={{
-    backgroundImage: "url('/img/img_back.jpg')",
-    backgroundPosition: 'center top', // ajuste à ta guise
-  }}
->
-  {/* Dégradé */}
-  <div className="absolute top-0 left-0 right-0 h-64 bg-gradient-to-b from-[#2E4E9C] to-transparent z-0" />
-
-  {/* Contenu */}
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10 transform -translate-y-10 md:-translate-y-16">
-    <div>
-      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6">
-        HoopSphère : L’APPLI POUR LES PASSIONNÉS DE BASKET !
-      </h1>
-      <p className="text-base sm:text-lg mb-8">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit.
-      </p>
-      <div className="flex flex-wrap gap-4">
-        <GooglePlayButton url={googlePlayUrl} theme="dark" width={180} height={60} />
-        <AppStoreButton url={appStoreUrl} theme="dark" width={180} height={60} />
+        {/* Contenu */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10 transform -translate-y-10 md:-translate-y-16">
+          <div>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6">
+              HoopSphère : L’APPLI POUR LES PASSIONNÉS DE BASKET !
+            </h1>
+            <p className="text-base sm:text-lg mb-8">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <GooglePlayButton url={googlePlayUrl} theme="dark" width={180} height={60} />
+              <AppStoreButton url={appStoreUrl} theme="dark" width={180} height={60} />
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
-     {/* Section Joueurs / Entraîneurs / Clubs */}
+      {/* Section Joueurs / Entraîneurs / Clubs */}
       <section className="bg-white py-20">
         <div className="max-w-7xl mx-auto px-8 flex flex-wrap justify-around gap-8">
           {/* Joueurs */}
@@ -204,39 +203,39 @@ function App() {
         </div>
       </section>
       <footer className="bg-[#151415] text-white">
-  <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 text-center items-center">
+        <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 text-center items-center">
 
-    {/* Logo centré */}
-    <div className="flex justify-center">
-      <img src="/img/LOGO-V.png" alt="HoopSphère Logo" className="w-24 sm:w-32 object-contain" />
-    </div>
+          {/* Logo centré */}
+          <div className="flex justify-center">
+            <img src="/img/LOGO-V.png" alt="HoopSphère Logo" className="w-24 sm:w-32 object-contain" />
+          </div>
 
-    {/* Liens au centre */}
-    <ul className="w-full flex flex-col sm:flex-row sm:justify-center items-center gap-2 sm:gap-4 text-xs sm:text-sm text-white/90 text-center">
-      <li className="hover:text-white cursor-pointer w-full sm:w-auto whitespace-nowrap">Mentions Légales</li>
-      <li className="hover:text-white cursor-pointer w-full sm:w-auto whitespace-nowrap">Conditions d’utilisation</li>
-      <li className="hover:text-white cursor-pointer w-full sm:w-auto whitespace-nowrap">Politique de confidentialité</li>
-    </ul>
+          {/* Liens au centre */}
+          <ul className="w-full flex flex-col sm:flex-row sm:justify-center items-center gap-2 sm:gap-4 text-xs sm:text-sm text-white/90 text-center">
+            <li className="hover:text-white cursor-pointer w-full sm:w-auto whitespace-nowrap">Mentions Légales</li>
+            <li className="hover:text-white cursor-pointer w-full sm:w-auto whitespace-nowrap">Conditions d’utilisation</li>
+            <li className="hover:text-white cursor-pointer w-full sm:w-auto whitespace-nowrap">Politique de confidentialité</li>
+          </ul>
 
-    {/* Réseaux centré */}
-    <div className="flex justify-center space-x-4">
-      <a href="#" aria-label="Facebook" className="hover:text-gray-300 text-2xl">
-        <FaFacebookF />
-      </a>
-      <a href="#" aria-label="Instagram" className="hover:text-gray-300 text-2xl">
-        <FaInstagram />
-      </a>
-      <a href="#" aria-label="Twitter" className="hover:text-gray-300 text-2xl">
-        <FaTwitter />
-      </a>
-    </div>
-  </div>
+          {/* Réseaux centré */}
+          <div className="flex justify-center space-x-4">
+            <a href="#" aria-label="Facebook" className="hover:text-gray-300 text-2xl">
+              <FaFacebookF />
+            </a>
+            <a href="#" aria-label="Instagram" className="hover:text-gray-300 text-2xl">
+              <FaInstagram />
+            </a>
+            <a href="#" aria-label="Twitter" className="hover:text-gray-300 text-2xl">
+              <FaTwitter />
+            </a>
+          </div>
+        </div>
 
-  {/* Copyright */}
-  <div className="bg-[#151415] text-center py-4 text-sm text-white/80">
-    © {new Date().getFullYear()} HoopSphère — Tous droits réservés.
-  </div>
-</footer>
+        {/* Copyright */}
+        <div className="bg-[#151415] text-center py-4 text-sm text-white/80">
+          © {new Date().getFullYear()} HoopSphère — Tous droits réservés.
+        </div>
+      </footer>
 
     </div>
   );
