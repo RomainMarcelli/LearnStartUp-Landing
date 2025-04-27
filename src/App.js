@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import emailjs from 'emailjs-com';
 import { GooglePlayButton, AppStoreButton, ButtonsContainer } from "react-mobile-app-button";
-import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import { FaBars, FaTimes } from 'react-icons/fa'; // Ajout en haut
 
 function App() {
@@ -35,9 +35,9 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <nav className="bg-[#2E4E9C] px-8 pt-2 flex justify-between items-center sticky top-0 z-50">
+      <nav className="bg-[#202020] px-8 pt-4 pb-4 flex justify-between items-center sticky top-0 z-50">
         <div className="text-white text-xl font-semibold flex items-center justify-between w-full md:w-auto">
-          <img src="/img/LOGO-SYMBOLE.png" alt="Logo symbole" className="w-[4.5rem] h-[4.5rem] ml-5" />
+          <img src="/img/LOGO-H.png" alt="Logo symbole" className="w-[9.5rem] h-[4.5rem] ml-5" />
         </div>
 
         {/* Menu Desktop */}
@@ -75,27 +75,31 @@ function App() {
 
       {/* SECTION HERO */}
       <div
-        className="w-full h-screen bg-no-repeat bg-cover text-white relative flex items-center"
+        className="w-full h-screen bg-no-repeat bg-cover text-white relative flex items-center overflow-hidden"
         style={{
           backgroundImage: "url('/img/img_back.jpg')",
-          backgroundPosition: 'center top', // ajuste à ta guise
+          backgroundPosition: 'center top',
         }}
       >
-        {/* Dégradé */}
-        <div className="absolute top-0 left-0 right-0 h-64 bg-gradient-to-b from-[#2E4E9C] to-transparent z-0" />
+        {/* Dégradé 1 (bleu) */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#2E4E9C] to-transparent opacity-80 z-0" />
+
+        {/* Dégradé 2 (orange) */}
+        <div className="absolute inset-0 bg-gradient-to-l from-[#F56B1E] to-transparent opacity-80 z-0" />
 
         {/* Contenu */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10 transform -translate-y-10 md:-translate-y-16">
-          <div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10">
+          <div className="transform -translate-y-10 md:-translate-y-16">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6">
-              Réseau, progression, succès !
-              Tout commence avec
+              Réseau, progression, succès !<br />
+              Tout commence avec<br />
               HoopSphère !
             </h1>
             <p className="text-base sm:text-lg mb-8">
               Que tu sois joueur, coach ou club, notre application te connecte aux meilleurs talents et opportunités. Trouve des équipes, repère des recrues, participe à des événements exclusifs et fais passer ton jeu au niveau supérieur.
-              <br></br>
-              Télécharge HoopSphère dès maintenant !
+              <br />
+              <br />
+              Télécharge HoopSphère dès maintenant !<br />
               Le monde du basketball t’attend !
             </p>
             <div className="flex flex-wrap gap-4">
@@ -205,9 +209,9 @@ function App() {
 
       {/* Section Présentation App */}
       <section className="bg-gradient-to-r from-[#2542A5] via-[#2E4E9C] to-[#F56B1E] py-24 relative overflow-hidden">
-        <div className="relative z-10 max-w-7xl mx-auto px-8 grid md:grid-cols-2 gap-16 items-center text-white">
-          <div className="space-y-6 ml-5">
-            <h2 className="text-4xl font-bold leading-tight">
+        <div className="relative z-10 max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-16 items-center text-white">
+          <div className="space-y-6 text-center md:text-left">
+            <h2 className="text-3xl md:text-4xl font-bold leading-tight">
               La plateforme qui connecte <br /> et propulse le basket !
             </h2>
             <p className="text-lg font-bold">
@@ -221,7 +225,7 @@ function App() {
             </p>
 
             {/* Liste */}
-            <ul className="list-decimal list-inside space-y-3 text-base">
+            <ul className="list-decimal list-inside space-y-3 text-base text-left">
               <li>Créez votre profil – Joueur, coach ou club, présentez votre parcours et vos objectifs.</li>
               <li>Suivez vos performances – Accédez à des statistiques détaillées pour analyser et améliorer votre jeu.</li>
               <li>Élargissez votre réseau – Connectez-vous avec des coaches, joueurs et clubs pour saisir de nouvelles opportunités.</li>
@@ -232,7 +236,7 @@ function App() {
         </div>
 
         {/* Image en absolute */}
-        <div className="absolute top-1/2 mr-20 right-10 transform -translate-y-1/2 translate-x-1/3 z-0">
+        <div className="absolute top-1/2 mr-20 right-10 transform -translate-y-1/2 translate-x-1/3 z-0 hide-on-small">
           <img
             src="/img/iphone.png"
             alt="Phone 1"
@@ -285,37 +289,46 @@ function App() {
         </div>
       </section>
       <footer className="bg-[#151415] text-white">
-        <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 text-center items-center">
-
-          {/* Logo centré */}
-          <div className="flex justify-center">
-            <img src="/img/LOGO-V.png" alt="HoopSphère Logo" className="w-24 sm:w-32 object-contain" />
+        <div className="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center md:items-end text-center md:text-left py-6 space-y-6 md:space-y-0">
+          {/* Logo au-dessus */}
+          <div className="flex flex-col items-center md:items-center">
+            <img src="/img/LOGO-H.png" alt="HoopSphère Logo" className="w-[13rem] object-contain" />
           </div>
 
-          {/* Liens au centre */}
-          <ul className="w-full flex flex-col sm:flex-row sm:justify-center items-center gap-2 sm:gap-4 text-xs sm:text-sm text-white/90 text-center">
-            <li className="hover:text-white cursor-pointer w-full sm:w-auto whitespace-nowrap">Mentions Légales</li>
-            <li className="hover:text-white cursor-pointer w-full sm:w-auto whitespace-nowrap">Conditions d’utilisation</li>
-            <li className="hover:text-white cursor-pointer w-full sm:w-auto whitespace-nowrap">Politique de confidentialité</li>
-          </ul>
 
-          {/* Réseaux centré */}
-          <div className="flex justify-center space-x-4">
-            <a href="#" aria-label="Facebook" className="hover:text-gray-300 text-2xl">
-              <FaFacebookF />
+          {/* Liens au centre */}
+          <ul className="flex flex-col sm:flex-row justify-center md:justify-center items-center md:items-start text-sm text-white uppercase space-y-2 sm:space-y-0 space-x-2 text-center">
+            <li className="flex items-center">
+              <span className="hover:text-white cursor-pointer whitespace-nowrap">Mentions légales</span>
+            </li>
+            <span>-</span>
+            <li className="flex items-center">
+              <span className="hover:text-white cursor-pointer whitespace-nowrap">Politique de confidentialité des données </span>
+            </li>
+            <span>-</span>
+            <li className="flex items-center">
+              <span className="hover:text-white cursor-pointer whitespace-nowrap">Gestion cookies</span>
+            </li>
+          </ul>
+          {/* Réseaux sociaux en dessous */}
+          <div className="flex justify-center md:justify-end space-x-4">
+            <a href="#" className="flex items-center justify-center w-10 h-10 rounded-full bg-[#F56B1E] hover:bg-orange-500">
+              <FaLinkedin className="text-black text-2xl" />
             </a>
-            <a href="#" aria-label="Instagram" className="hover:text-gray-300 text-2xl">
-              <FaInstagram />
+            <a href="#" className="flex items-center justify-center w-10 h-10 rounded-full bg-[#F56B1E] hover:bg-orange-500">
+              <FaFacebookF className="text-black text-2xl" />
             </a>
-            <a href="#" aria-label="Twitter" className="hover:text-gray-300 text-2xl">
-              <FaTwitter />
+            <a href="#" className="flex items-center justify-center w-10 h-10 rounded-full bg-[#F56B1E] hover:bg-orange-500">
+              <FaInstagram className="text-black text-2xl" />
             </a>
           </div>
         </div>
 
         {/* Copyright */}
-        <div className="bg-[#151415] text-center py-4 text-sm text-white/80">
-          © {new Date().getFullYear()} HoopSphère — Tous droits réservés.
+        <div className="flex flex-col sm:flex-row justify-center items-center text-xs gap-4 py-4 text-white/80">
+          <span>COPYRIGHT © {new Date().getFullYear()} HoopSphère</span>
+          <span className="hidden sm:inline">|</span>
+          <span>TOUS DROITS RÉSERVÉS</span>
         </div>
       </footer>
 
