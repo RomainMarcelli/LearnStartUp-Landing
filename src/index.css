@@ -14,6 +14,11 @@
 
 .animate-spin-border {
   animation: spin-border 3s linear infinite;
+  background-attachment: fixed
+}
+
+.img_back{
+  background-attachment: fixed
 }
 
 
