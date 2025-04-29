@@ -13,6 +13,7 @@ module.exports = {
         },
         screens: {
           'custom': '1300px', // breakpoint à 1300px
+          'xs': '500px', // Nouveau breakpoint à 500px
         },
         animation: {
           float: 'float 2.5s ease-in-out infinite',

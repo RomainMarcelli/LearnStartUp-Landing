@@ -251,7 +251,7 @@ function App() {
 
       {/* Section Téléchargement CTA */}
       <section className="relative text-white h-[510px] sm:h-[410px]">
-      <div
+        <div
           className="absolute inset-0 bg-cover bg-center bg-fixed"
           style={{ backgroundImage: "url('/img/panier.jpg')" }}
         ></div>
@@ -272,14 +272,14 @@ function App() {
           <p className="my-10 text-2xl max-w-4xl mx-auto">
             Recevez les dernières actualités, événements et nouveautés de HoopSphère directement dans votre boîte mail.
           </p>
-          <form onSubmit={handleSubmit} className="flex flex-col md:flex-row items-center justify-center gap-0">
+          <form onSubmit={handleSubmit} className="flex flex-row items-center justify-center gap-0">
             <input
               type="email"
               required
               placeholder="Votre adresse email"
               value={formData.email}
               onChange={(e) => setFormData({ email: e.target.value })}
-              className="px-5 py-5 rounded-l-md text-xl md:w-[400px] text-black focus:outline-none"
+              className="px-5 py-5 rounded-l-md text-xl w-[250px] md:w-[400px] text-black focus:outline-none"
             />
             <button
               type="submit"
@@ -300,7 +300,7 @@ function App() {
 
           {/* Liens */}
           <div>
-            <ul className="flex flex-col sm:flex-row justify-center flex-wrap md:justify-center items-center text-xl text-white uppercase space-y-2 sm:space-y-0 sm:space-x-4 text-center">
+            <ul className="flex flex-col sm:flex-row justify-center flex-wrap md:justify-center items-center text-m xs:text-xl text-white uppercase space-y-2 sm:space-y-0 sm:space-x-4 text-center">
               <li className="flex items-center">
                 <span className="hover:text-white cursor-pointer whitespace-nowrap">Mentions légales</span>
               </li>
