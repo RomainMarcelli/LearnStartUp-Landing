@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import emailjs from 'emailjs-com';
 import { GooglePlayButton, AppStoreButton, ButtonsContainer } from "react-mobile-app-button";
 import { FaFacebookF, FaInstagram, FaLinkedin } from 'react-icons/fa';
@@ -33,15 +33,38 @@ function App() {
     setFormData({ email: '' });
   };
 
+  function ResponsiveStoreButtons({ googlePlayUrl, appStoreUrl }) {
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 500);
+
+    useEffect(() => {
+      const handleResize = () => setIsMobile(window.innerWidth < 500);
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    const width = isMobile ? 178 : 200;
+    const height = isMobile ? 60 : 70;
+
+    return (
+      <div className="flex flex-row flex-nowrap gap-4 overflow-hidden">
+        <GooglePlayButton url={googlePlayUrl} theme="dark" width={width} height={height} />
+        <AppStoreButton url={appStoreUrl} theme="dark" width={width} height={height} />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
-      <nav className="bg-[#202020] px-14 pt-4 pb-4 flex justify-between items-center sticky top-0 z-50">
-        <div className="text-white text-xl font-semibold flex items-center justify-between w-full md:w-auto">
-          <img src="/img/LOGO-H.png" alt="Logo symbole" className="w-[13.5rem] h-[6.5rem] ml-14" />
+      <nav className="bg-[#202020] px-2 md:px-14 pt-4 pb-4 flex justify-between items-center sticky top-0 z-50">
+        <div className="text-white text-xl font-semibold flex items-center w-full md:w-auto">
+          <img
+            src="/img/LOGO-H.png"
+            alt="Logo symbole"
+            className="w-[10rem] h-[5rem] md:w-[13.5rem] md:h-[6.5rem] ml-2 md:ml-14"
+          />
         </div>
 
-        {/* Menu Desktop */}
-        <ul className="hidden md:flex space-x-8 items-center text-base mr-14">
+        <ul className="flex items-center justify-end text-base mr-2 md:mr-14">
           <li>
             <div
               className={`p-[2px] rounded-full inline-block transition-all duration-300 ${hovered
@@ -52,17 +75,21 @@ function App() {
               <button
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
-                className={`relative w-[320px] h-[68px] text-xl rounded-full text-white font-bold overflow-hidden flex items-center justify-center transition-colors duration-300 ${hovered ? 'bg-[#F56B1E]' : 'bg-[#1b1b1b]'
+                className={`relative w-[140px] xs400:w-[200px] md:w-[320px] h-[50px] md:h-[68px] px-5 md:px-6 text-base md:text-xl rounded-full text-white font-bold overflow-hidden flex items-center justify-center transition-colors duration-300 ${hovered ? 'bg-[#F56B1E]' : 'bg-[#1b1b1b]'
                   }`}
               >
+                {/* Mobile version (sans animation) */}
+                <span className="md:hidden">Télécharger</span>
+
+                {/* Desktop animation */}
                 <span
-                  className={`absolute transition-all duration-500 ${hovered ? 'translate-y-0 opacity-100' : '-translate-y-10 opacity-0'
+                  className={`absolute hidden md:block transition-all duration-500 ${hovered ? 'translate-y-0 opacity-100' : '-translate-y-10 opacity-0'
                     }`}
                 >
                   Commencer HoopSphère
                 </span>
                 <span
-                  className={`absolute transition-all duration-500 ${hovered ? 'translate-y-10 opacity-0' : 'translate-y-0 opacity-100'
+                  className={`absolute hidden md:block transition-all duration-500 ${hovered ? 'translate-y-10 opacity-0' : 'translate-y-0 opacity-100'
                     }`}
                 >
                   Télécharger l'application
@@ -72,7 +99,6 @@ function App() {
           </li>
         </ul>
       </nav>
-
       {/* SECTION HERO */}
       <div
         className="img_back w-full h-screen bg-no-repeat bg-cover text-white relative flex items-center overflow-hidden"
@@ -87,14 +113,14 @@ function App() {
         <div className="absolute inset-0 bg-gradient-to-l from-[#F56B1E] to-transparent opacity-80 z-0" />
 
         {/* Contenu */}
-        <div className="relative z-10 px-6 sm:px-8 md:px-12 max-w-6xl xl:ml-[150px] flex flex-col gap-10">
+        <div className="relative z-10 px-2 xs400:px-6 sm:px-8 md:px-12 max-w-6xl xl:ml-[150px] flex flex-col gap-10 text-center xs:text-left">
           <div>
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold mb-8 flex flex-col gap-4">
+            <h1 className="text-2xl xs400:text-4xl sm:text-5xl md:text-7xl font-extrabold mb-8 flex flex-col gap-4">
               <span>Réseau, progression, succès !</span>
               <span>Tout commence avec</span>
               <span>HoopSphère !</span>
             </h1>
-            <div className="text-2xl sm:text-3xl mb-10 flex flex-col gap-8">
+            <div className="text-lg xs400:text-2xl sm:text-3xl mb-10 flex flex-col gap-8">
               <p className="leading-relaxed">
                 Que tu sois joueur, coach ou club, notre application te connecte aux meilleurs talents et opportunités.
                 Trouve des équipes, repère des recrues, participe à des événements exclusifs et fais passer ton jeu au niveau supérieur.
@@ -104,10 +130,7 @@ function App() {
                 Le monde du basketball t’attend !
               </p>
             </div>
-            <div className="flex flex-wrap gap-6">
-              <GooglePlayButton url={googlePlayUrl} theme="dark" width={200} height={70} />
-              <AppStoreButton url={appStoreUrl} theme="dark" width={200} height={70} />
-            </div>
+            <ResponsiveStoreButtons googlePlayUrl={googlePlayUrl} appStoreUrl={appStoreUrl} />
           </div>
         </div>
       </div>
@@ -115,99 +138,79 @@ function App() {
 
       {/* Section Joueurs / Entraîneurs / Clubs */}
       <section className="bg-white py-20">
-        <div className="px-8 flex flex-wrap justify-evenly gap-12">
-          <div className="group relative w-[420px] h-[550px] rounded-[24.3px] overflow-hidden shadow-lg">
-            {/* Background image */}
-            <div
-              className="absolute inset-0 bg-cover bg-[24%_30%] transition-transform duration-500 scale-100 group-hover:scale-110"
-              style={{ backgroundImage: "url('/img/joueur.jpg')" }}
-            />
+        <div className="container flex flex-wrap justify-center gap-y-16 gap-x-[3.5rem]">
 
-            {/* Gray overlay */}
-            <div className="absolute inset-0 bg-black/30 z-10 pointer-events-none"></div>
-
-            {/* Persistent title */}
-            <div
-              className="absolute left-1/2 transform -translate-x-1/2 z-40 pointer-events-none transition-all duration-500 top-1/2 group-hover:top-5"
-            >
-              <h3 className="text-3xl font-semibold text-white text-center whitespace-nowrap transition-all duration-500 group-hover:mt-4">
-                T'es un joueur
-              </h3>
-            </div>
-            {/* Hover content */}
-            <div className="absolute inset-0 flex flex-col items-center justify-between px-6 py-6 text-white text-center transition-all duration-500 bg-black/50 backdrop-blur-md opacity-0 group-hover:opacity-100 z-30">
-              <div className="mt-[7.2rem]">
-                <p className="text-xl font-light leading-relaxed">
-                  HoopSphere booste chaque joueur en offrant un suivi personnalisé de ses statistiques, tout en connectant coaches et clubs pour une progression continue.
-                  <br />
-                  Chaque joueur peut ainsi se dépasser et viser de nouveaux horizons, que ce soit pour ses objectifs personnels ou pour jouer au plus haut niveau.
-                </p>
-              </div>
-
-              <button
-                className=" mt-2 mb-4 mx-auto w-[300px] h-[70px] text-xl rounded-full text-white font-semibold border-2 border-white hover:bg-white hover:text-black transition duration-300"
-              >
-                Créer son compte joueur
-              </button>
-            </div>
-          </div>
-
-          {/* CLUB */}
-          <div className="group relative w-[420px] h-[550px] rounded-[24.3px] overflow-hidden shadow-lg">
-            {/* Background image */}
-            <div
-              className="absolute inset-0 bg-cover bg-center transition-transform duration-500 scale-100 group-hover:scale-110"
-              style={{ backgroundImage: "url('/img/club.jpg')" }}
-            />
-
-            {/* Gray overlay */}
-            <div className="absolute inset-0 bg-black/30 z-10 pointer-events-none"></div>
-
-            {/* Persistent title */}
-            <div
-              className="absolute left-1/2 transform -translate-x-1/2 z-40 pointer-events-none transition-all duration-500 top-1/2 group-hover:top-5"
-            >
-              <h3 className="text-3xl font-semibold text-white text-center whitespace-nowrap transition-all duration-500 group-hover:mt-4">
-                T'es un club
-              </h3>
-            </div>
-
-            {/* Hover content */}
-            <div className="absolute inset-0 flex flex-col justify-between px-6 py-6 text-white text-center transition-all duration-500 bg-black/50 backdrop-blur-md opacity-0 group-hover:opacity-100 z-30">
-              <div className="mt-[7.2rem]">
-                <p className="text-xl font-light leading-relaxed">
-                  HoopSphere permet aux clubs de recruter plus facilement en accédant à un réseau de joueurs et de coachs qualifiés.
-                  <br />
-                  Grâce à des profils détaillés et des statistiques précises, chaque club peut renforcer ses équipes efficacement.
-                </p>
-              </div>
-
-              <button
-                className=" mt-2 mb-4 mx-auto w-[300px] h-[70px] text-xl rounded-full text-white font-semibold border-2 border-white hover:bg-white hover:text-black transition duration-300"
-              >
-                Créer son compte club
-              </button>
-            </div>
-          </div>
-
-          {/* Entraîneurs */}
-          <div className="relative w-[420px] h-[550px] rounded-[24.3px] overflow-hidden shadow-lg bg-cover bg-[22%_30%]" style={{ backgroundImage: "url('/img/coach.jpg')" }}>
-            {/* Overlay plus sombre */}
-            <div className="absolute inset-0 bg-black/70 z-10 flex flex-col justify-between p-6 text-white">
+          {/* Carte Joueur */}
+          <div className="w-full sm:w-[48%] xl:w-[30%] flex justify-center">
+            <div className="group w-full max-w-[420px] h-[550px] rounded-[24.3px] overflow-hidden shadow-lg relative">
               <div
-                className="absolute left-1/2 transform -translate-x-1/2 z-40 pointer-events-none transition-all duration-500 top-1/2 group-hover:top-5"
-              >
-                <h3 className="text-3xl font-semibold text-white text-center whitespace-nowrap">
-                  T'es un entraîneur
+                className="absolute inset-0 bg-cover bg-[24%_30%] transition-transform duration-500 scale-100 group-hover:scale-110"
+                style={{ backgroundImage: "url('/img/joueur.jpg')" }}
+              />
+              <div className="absolute inset-0 bg-black/30 z-10 pointer-events-none"></div>
+              <div className="absolute left-1/2 transform -translate-x-1/2 z-40 top-1/2 group-hover:top-5 transition-all duration-500">
+                <h3 className="text-3xl font-semibold text-white text-center whitespace-nowrap group-hover:mt-4">
+                  T'es un joueur
                 </h3>
-                <p className='text-center text-s'>(Bientôt disponible)</p>
               </div>
-              {/* <p className="text-sm text-left">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor,
-                dignissim sit
-              </p> */}
+              <div className="absolute inset-0 flex flex-col items-center justify-between px-6 py-6 text-white text-center transition-all duration-500 bg-black/50 backdrop-blur-md opacity-0 group-hover:opacity-100 z-30">
+                <div className="mt-[7.2rem]">
+                  <p className="text-xl font-light leading-relaxed">
+                    HoopSphere booste chaque joueur en offrant un suivi personnalisé de ses statistiques,
+                    tout en connectant coaches et clubs pour une progression continue.
+                    <br /><br />
+                    Chaque joueur peut ainsi se dépasser et viser de nouveaux horizons.
+                  </p>
+                </div>
+                <button className="mt-2 mb-4 mx-auto w-[300px] h-[70px] text-xl rounded-full text-white font-semibold border-2 border-white hover:bg-white hover:text-black transition duration-300">
+                  Créer son compte joueur
+                </button>
+              </div>
             </div>
           </div>
+
+          {/* Carte Club */}
+          <div className="w-full sm:w-[48%] xl:w-[30%] flex justify-center">
+            <div className="group w-full max-w-[420px] h-[550px] rounded-[24.3px] overflow-hidden shadow-lg relative">
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 scale-100 group-hover:scale-110"
+                style={{ backgroundImage: "url('/img/club.jpg')" }}
+              />
+              <div className="absolute inset-0 bg-black/30 z-10 pointer-events-none"></div>
+              <div className="absolute left-1/2 transform -translate-x-1/2 z-40 top-1/2 group-hover:top-5 transition-all duration-500">
+                <h3 className="text-3xl font-semibold text-white text-center whitespace-nowrap group-hover:mt-4">
+                  T'es un club
+                </h3>
+              </div>
+              <div className="absolute inset-0 flex flex-col items-center justify-between px-6 py-6 text-white text-center transition-all duration-500 bg-black/50 backdrop-blur-md opacity-0 group-hover:opacity-100 z-30">
+                <div className="mt-[7.2rem]">
+                  <p className="text-xl font-light leading-relaxed">
+                    HoopSphere permet aux clubs de recruter plus facilement en accédant à un réseau de joueurs et de coachs qualifiés.
+                    <br /><br />
+                    Grâce à des profils détaillés et des statistiques précises, chaque club peut renforcer ses équipes efficacement.
+                  </p>
+                </div>
+                <button className="mt-2 mb-4 mx-auto w-[300px] h-[70px] text-xl rounded-full text-white font-semibold border-2 border-white hover:bg-white hover:text-black transition duration-300">
+                  Créer son compte club
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Carte Entraîneur */}
+          <div className="w-full sm:w-[48%] xl:w-[30%] flex justify-center">
+            <div className="group w-full max-w-[420px] h-[550px] rounded-[24.3px] overflow-hidden shadow-lg relative bg-cover bg-[22%_30%]" style={{ backgroundImage: "url('/img/coach.jpg')" }}>
+              <div className="absolute inset-0 bg-black/70 z-10 flex flex-col justify-between p-6 text-white">
+                <div className="absolute left-1/2 transform -translate-x-1/2 z-40 top-1/2">
+                  <h3 className="text-3xl font-semibold text-white text-center whitespace-nowrap">
+                    T'es un entraîneur
+                  </h3>
+                  <p className='text-center text-sm mt-2'>(Bientôt disponible)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -268,8 +271,8 @@ function App() {
       </section>
       <section className="bg-gradient-to-r from-[#2E4E9C] to-[#1A1A2E] py-14 text-white">
         <div className="mx-auto text-center px-6">
-          <h2 className="text-5xl font-bold mb-4">Abonnez-vous à notre newsletter</h2>
-          <p className="my-10 text-2xl max-w-4xl mx-auto">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-4">Abonnez-vous à notre newsletter</h2>
+          <p className="my-10 text-xl sm:text-2xl max-w-4xl mx-auto">
             Recevez les dernières actualités, événements et nouveautés de HoopSphère directement dans votre boîte mail.
           </p>
           <form onSubmit={handleSubmit} className="flex flex-row items-center justify-center gap-0">
@@ -279,11 +282,11 @@ function App() {
               placeholder="Votre adresse email"
               value={formData.email}
               onChange={(e) => setFormData({ email: e.target.value })}
-              className="px-5 py-5 rounded-l-md text-xl w-[250px] md:w-[400px] text-black focus:outline-none"
+              className="px-4 py-4 text-base xs400:px-5 xs400:py-5 xs400:text-xl rounded-l-md w-[180px] xs400:w-[250px] md:w-[400px] text-black focus:outline-none"
             />
             <button
               type="submit"
-              className="bg-[#F56B1E] px-6 py-5 text-xl rounded-r-md hover:bg-orange-600 transition-colors"
+              className="bg-[#F56B1E] px-4 py-4 text-base xs400:px-6 xs400:py-5 xs400:text-xl rounded-r-md hover:bg-orange-600 transition-colors"
             >
               S'abonner
             </button>
@@ -306,7 +309,9 @@ function App() {
               </li>
               <span className="hidden sm:inline">-</span>
               <li className="flex items-center">
-                <span className="hover:text-white cursor-pointer whitespace-nowrap">Politique de confidentialité des données</span>
+                <span className="hover:text-white cursor-pointer whitespace-nowrap">
+                  Politique de confidentialité<wbr /> des données
+                </span>
               </li>
               <span className="hidden sm:inline">-</span>
               <li className="flex items-center">
