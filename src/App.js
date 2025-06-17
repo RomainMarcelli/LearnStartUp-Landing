@@ -244,7 +244,7 @@ function App() {
           {/* Bloc Téléphone */}
           <div className="order-2 flex justify-center lg:justify-center">
             <img
-              src="/img/iphone-rd.png"
+              src="/img/iphonenew.png"
               alt="Phone"
               className="w-[300px] sm:w-[400px] md:w-[550px] min-w-0 mr-0 2xl:mr-20 animate-float pointer-events-none"
             />
