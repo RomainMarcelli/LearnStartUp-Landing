@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes spin-border {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-border {
+  animation: spin-border 3s linear infinite;
+  background-attachment: fixed
+}
+
+.img_back{
+  background-attachment: fixed
+}
+
+
+@media (max-width: 768px) {
+  .hide-on-small {
+    display: none;
+  }
+}
