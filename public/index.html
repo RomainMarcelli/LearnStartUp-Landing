@@ -5,24 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Primary Meta Tags -->
+    <!-- SEO PRINCIPAL -->
     <title>HoopSphère — Propulse ton jeu</title>
-    <meta name="title" content="HoopSphère — Propulse ton jeu" />
-    <meta name="description" content="Rejoins HoopSphère, la plateforme dédiée aux joueurs, coachs et clubs de basketball. Crée ton profil, suis tes performances et connecte-toi à des opportunités." />
-    <meta name="theme-color" content="#202020" />
-    <meta name="keywords" content="basketball, joueur, club, coach, application basket, réseau sportif, hoopshere" />
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="HoopSphère connecte joueurs, coachs et clubs de basketball. Crée ton profil, suis tes performances et découvre de nouvelles opportunités près de chez toi." />
+    <meta name="keywords" content="basketball, joueur, club, coach, statistiques, application basket, réseau sportif, hoopssphere, hoopshere, classement, match, jeu, panier, point, basket, passion, français" />
+    <meta http-equiv="Content-Language" content="fr" />
     <meta name="author" content="HoopSphère" />
+    <meta name="theme-color" content="#202020" />
 
-    <!-- Favicon & App Icons -->
+    <!-- URL canonique basée sur l'IP actuelle -->
+    <link rel="canonical" href="http://185.98.138.140/" />
+
+    <!-- Favicon & Web App -->
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://hoopshere.com/" />
+    <meta property="og:url" content="http://185.98.138.140/" />
     <meta property="og:title" content="HoopSphère — Propulse ton jeu" />
     <meta property="og:description" content="Joue, connecte, recrute : découvre HoopSphère, la plateforme dédiée aux passionnés de basketball." />
+    <!-- Pour le moment : pas d’URL absolue → l’image locale sera utilisée -->
     <meta property="og:image" content="%PUBLIC_URL%/preview.jpg" />
 
     <!-- Twitter -->
@@ -31,10 +36,33 @@
     <meta property="twitter:description" content="Joue, connecte, recrute : découvre HoopSphère, la plateforme dédiée aux passionnés de basketball." />
     <meta property="twitter:image" content="%PUBLIC_URL%/preview.jpg" />
 
-    <!-- Fonts (optionnel) -->
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"> -->
+    <!-- Preload de l'image Hero (améliore le chargement visuel) -->
+    <link rel="preload" as="image" href="/img/img_back-min.jpg">
 
+    <!-- Schema.org (SEO avancé, fonctionne même avec IP) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "HoopSphère",
+      "creator": {
+        "@type": "Organization",
+        "name": "HoopSphère"
+      },
+      "applicationCategory": "SportsApplication",
+      "operatingSystem": "iOS, Android",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "description": "Plateforme qui connecte joueurs, coachs et clubs de basketball. Suivez vos statistiques, trouvez une équipe et explorez des opportunités.",
+      "image": "/preview.jpg",
+      "url": "http://185.98.138.140/"
+    }
+    </script>
   </head>
+
   <body>
     <noscript>Activez JavaScript pour utiliser HoopSphère.</noscript>
     <div id="root"></div>
