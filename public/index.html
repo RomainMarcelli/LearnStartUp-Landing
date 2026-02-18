@@ -14,53 +14,62 @@
     <meta name="author" content="HoopSphère" />
     <meta name="theme-color" content="#202020" />
 
-    <!-- URL canonique basée sur l'IP actuelle -->
-    <link rel="canonical" href="http://185.98.138.140/" />
+    <link rel="canonical" href="https://hoopsphere.fr/" />
 
     <!-- Favicon & Web App -->
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="icon" href="./favicon.ico" />
+    <link rel="apple-touch-icon" href="./logo192.png" />
+    <link rel="manifest" href="./manifest.json" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="http://185.98.138.140/" />
+    <meta property="og:url" content="https://hoopsphere.fr/" />
     <meta property="og:title" content="HoopSphère — Propulse ton jeu" />
     <meta property="og:description" content="Joue, connecte, recrute : découvre HoopSphère, la plateforme dédiée aux passionnés de basketball." />
     <!-- Pour le moment : pas d’URL absolue → l’image locale sera utilisée -->
-    <meta property="og:image" content="%PUBLIC_URL%/preview.jpg" />
+    <meta property="og:image" content="./preview.jpg" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:title" content="HoopSphère — Propulse ton jeu" />
     <meta property="twitter:description" content="Joue, connecte, recrute : découvre HoopSphère, la plateforme dédiée aux passionnés de basketball." />
-    <meta property="twitter:image" content="%PUBLIC_URL%/preview.jpg" />
+    <meta property="twitter:image" content="./preview.jpg" />
 
     <!-- Preload de l'image Hero (améliore le chargement visuel) -->
     <link rel="preload" as="image" href="/img/img_back-min.jpg">
 
     <!-- Schema.org (SEO avancé, fonctionne même avec IP) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "HoopSphère",
-      "creator": {
-        "@type": "Organization",
-        "name": "HoopSphère"
-      },
-      "applicationCategory": "SportsApplication",
-      "operatingSystem": "iOS, Android",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "EUR"
-      },
-      "description": "Plateforme qui connecte joueurs, coachs et clubs de basketball. Suivez vos statistiques, trouvez une équipe et explorez des opportunités.",
-      "image": "/preview.jpg",
-      "url": "http://185.98.138.140/"
-    }
+   <script type="application/ld+json">
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "HoopSphère",
+          "creator": {
+            "@type": "Organization",
+            "name": "HoopSphère"
+          },
+          "applicationCategory": "SportsApplication",
+          "operatingSystem": "iOS, Android",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "EUR"
+          },
+          "description": "Plateforme qui connecte joueurs, coachs et clubs de basketball.",
+          "image": "https://hoopsphere.fr/preview.jpg",
+          "url": "https://hoopsphere.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "HoopSphère",
+          "url": "https://hoopsphere.fr",
+          "logo": "https://hoopsphere.fr/img/LOGO-SYMBOLE.png"
+        }
+      ]
     </script>
+
   </head>
 
   <body>
