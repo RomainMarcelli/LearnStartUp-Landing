@@ -2,12 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import GestionCookies from './GestionCookies';
+import MentionsLegales from './MentionsLegales';
+import PolitiqueConfidentialite from './PolitiqueConfidentialite';
 import reportWebVitals from './reportWebVitals';
+
+const normalizedPath = window.location.pathname.replace(/\/+$/, "") || "/";
+const pageByPath = {
+  "/mentions-legales": MentionsLegales,
+  "/mentions-legales.html": MentionsLegales,
+  "/politique-confidentialite": PolitiqueConfidentialite,
+  "/politique-confidentialite.html": PolitiqueConfidentialite,
+  "/gestion-cookies": GestionCookies,
+  "/gestion-cookies.html": GestionCookies,
+};
+const ActivePage = pageByPath[normalizedPath] || App;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <ActivePage />
   </React.StrictMode>
 );
 

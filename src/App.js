@@ -1,26 +1,69 @@
 import { useState, useEffect } from "react";
 import emailjs from "emailjs-com";
-import { FaFacebookF, FaInstagram, FaLinkedin } from "react-icons/fa";
+import {
+  FaChevronDown,
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedin,
+} from "react-icons/fa";
+import Modal from "./components/Modal";
+
+const EMAILJS_SERVICE_ID = "service_ah99b6s";
+const EMAILJS_NEWSLETTER_TEMPLATE_ID = "template_qol73hn";
+const EMAILJS_BETA_TEMPLATE_ID = "template_qol73hn";
+const EMAILJS_PUBLIC_KEY = "-3UT8cRVJ9ChBJXSM";
+const BETA_RECIPIENT_EMAIL = "hoopsphere.fr@gmail.com";
+
+const faqItems = [
+  {
+    q: "HoopSphère est-elle gratuite ?",
+    a: "Oui, l'application est entièrement gratuite au téléchargement et à l'utilisation. Des fonctionnalités premium pourront être proposées ultérieurement.",
+  },
+  {
+    q: "Sur quelles plateformes l'application est-elle disponible ?",
+    a: "HoopSphère est disponible sur iOS (App Store) et Android (Google Play). Téléchargez-la dès maintenant pour commencer votre expérience basket.",
+  },
+  {
+    q: "Comment créer mon profil joueur ?",
+    a: "Téléchargez l'application, inscrivez-vous avec votre email, puis complétez votre profil avec vos statistiques, votre poste et vos objectifs.",
+  },
+  {
+    q: "Les clubs peuvent-ils recruter via HoopSphère ?",
+    a: "Absolument ! Les clubs accèdent à une base de joueurs avec profils détaillés et statistiques pour faciliter le recrutement.",
+  },
+  {
+    q: "Mes données personnelles sont-elles protégées ?",
+    a: "Oui, HoopSphère respecte le RGPD et la réglementation française en matière de protection des données. Consultez notre politique de confidentialité pour plus de détails.",
+  },
+  {
+    q: "Comment contacter l'équipe HoopSphère ?",
+    a: "Vous pouvez nous contacter via nos réseaux sociaux (Instagram, Facebook, LinkedIn) ou directement dans l'application.",
+  },
+];
 
 function App() {
-  // const appStoreUrl = "https://apps.apple.com/"; // à remplacer par ton vrai lien
-  // const googlePlayUrl = "https://play.google.com/store/apps"; // à remplacer aussi
-  const appStoreUrl = "/"; // à remplacer par ton vrai lien
-  const googlePlayUrl = "/"; // à remplacer aussi
-
   const [formData, setFormData] = useState({ email: "" });
   const [status, setStatus] = useState(null);
   const [hovered, setHovered] = useState(false);
+  const [openFaqIndex, setOpenFaqIndex] = useState(0);
+  const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
+  const [isBetaSubmitting, setIsBetaSubmitting] = useState(false);
+  const [betaStatus, setBetaStatus] = useState(null);
+  const [betaFormData, setBetaFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     emailjs
       .send(
-        "service_l763e7g",
-        "template_gqw8am9",
+        EMAILJS_SERVICE_ID,
+        EMAILJS_NEWSLETTER_TEMPLATE_ID,
         formData,
-        "Iw-kl6b1kOYSMatcX"
+        EMAILJS_PUBLIC_KEY
       )
       .then(
         () => setStatus("Merci pour votre inscription !"),
@@ -30,7 +73,84 @@ function App() {
     setFormData({ email: "" });
   };
 
-  function ResponsiveStoreButtons({ googlePlayUrl, appStoreUrl }) {
+  const openDownloadModal = () => {
+    setBetaStatus(null);
+    setBetaFormData({ firstName: "", lastName: "", email: "" });
+    setIsDownloadModalOpen(true);
+  };
+
+  const closeDownloadModal = () => {
+    setIsDownloadModalOpen(false);
+  };
+
+  const handleBetaSubmit = (event) => {
+    event.preventDefault();
+    if (isBetaSubmitting) {
+      return;
+    }
+
+    const firstName = betaFormData.firstName.trim();
+    const lastName = betaFormData.lastName.trim();
+    const email = betaFormData.email.trim();
+
+    if (!firstName || !lastName || !email) {
+      setBetaStatus({
+        type: "error",
+        message: "Merci de compléter les trois champs du formulaire.",
+      });
+      return;
+    }
+
+    const betaRequestMessage = [
+      "Nouvelle demande d'inscription beta HoopSphere",
+      `Prénom: ${firstName}`,
+      `Nom: ${lastName}`,
+      `Email: ${email}`,
+    ].join("\n");
+
+    const betaTemplateParams = {
+      email,
+      first_name: firstName,
+      last_name: lastName,
+      to_email: BETA_RECIPIENT_EMAIL,
+      recipient_email: BETA_RECIPIENT_EMAIL,
+      reply_to: email,
+      request_type: "beta_tester",
+      source: "landing_download_modal",
+      message: betaRequestMessage,
+    };
+
+    setIsBetaSubmitting(true);
+    setBetaStatus(null);
+
+    emailjs
+      .send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_BETA_TEMPLATE_ID,
+        betaTemplateParams,
+        EMAILJS_PUBLIC_KEY
+      )
+      .then(() => {
+        setBetaStatus({
+          type: "success",
+          message:
+            "Merci ! Votre demande a bien été envoyée. Nous vous recontacterons rapidement.",
+        });
+        setBetaFormData({ firstName: "", lastName: "", email: "" });
+      })
+      .catch(() => {
+        setBetaStatus({
+          type: "error",
+          message:
+            "L'envoi a échoué. Merci de réessayer dans quelques instants.",
+        });
+      })
+      .finally(() => {
+        setIsBetaSubmitting(false);
+      });
+  };
+
+  function ResponsiveStoreButtons({ onOpenDownloadModal }) {
     const [isMobile, setIsMobile] = useState(window.innerWidth < 500);
 
     useEffect(() => {
@@ -43,21 +163,31 @@ function App() {
 
     return (
       <div className="flex justify-center md:justify-start items-center gap-6 w-full mt-4">
-        <a href={googlePlayUrl} target="_blank">
+        <button
+          type="button"
+          onClick={onOpenDownloadModal}
+          aria-label="Ouvrir le formulaire beta Android"
+          className="transition-transform duration-300 hover:scale-[1.03] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F56B1E] focus-visible:ring-offset-2 focus-visible:ring-offset-[#202020]"
+        >
           <img
             src="/img/btnGooglePlay.png"
             className={`${size} h-auto`}
             alt="Google Play"
           />
-        </a>
+        </button>
 
-        <a href={appStoreUrl} target="_blank">
+        <button
+          type="button"
+          onClick={onOpenDownloadModal}
+          aria-label="Voir la disponibilité iOS"
+          className="transition-transform duration-300 hover:scale-[1.03] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F56B1E] focus-visible:ring-offset-2 focus-visible:ring-offset-[#202020]"
+        >
           <img
             src="/img/btnAppStore.png"
             className={`${size} h-auto`}
             alt="App Store"
           />
-        </a>
+        </button>
       </div>
     );
   }
@@ -86,6 +216,7 @@ function App() {
                 aria-label="Télécharger l'application HoopSphere"
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
+                onClick={openDownloadModal}
                 className={`relative w-[140px] xs400:w-[200px] md:w-[320px] h-[50px] md:h-[68px] px-5 md:px-6 text-base md:text-xl rounded-full text-white font-bold overflow-hidden flex items-center justify-center transition-colors duration-300 ${
                   hovered ? "bg-[#F56B1E]" : "bg-[#1b1b1b]"
                 }`}
@@ -151,8 +282,7 @@ function App() {
               </p>
             </div>
             <ResponsiveStoreButtons
-              googlePlayUrl={googlePlayUrl}
-              appStoreUrl={appStoreUrl}
+              onOpenDownloadModal={openDownloadModal}
             />
           </div>
         </div>
@@ -186,7 +316,11 @@ function App() {
                     horizons.
                   </p>
                 </div>
-                <button className="mt-2 mb-4 mx-auto w-[300px] h-[70px] text-xl rounded-full text-white font-semibold border-2 border-white hover:bg-white hover:text-black transition duration-300">
+                <button
+                  type="button"
+                  onClick={openDownloadModal}
+                  className="mt-2 mb-4 mx-auto w-[300px] h-[70px] text-xl rounded-full text-white font-semibold border-2 border-white hover:bg-white hover:text-black transition duration-300"
+                >
                   Créer son compte joueur
                 </button>
               </div>
@@ -217,7 +351,11 @@ function App() {
                     chaque club peut renforcer ses équipes efficacement.
                   </p>
                 </div>
-                <button className="mt-2 mb-4 mx-auto w-[300px] h-[70px] text-xl rounded-full text-white font-semibold border-2 border-white hover:bg-white hover:text-black transition duration-300">
+                <button
+                  type="button"
+                  onClick={openDownloadModal}
+                  className="mt-2 mb-4 mx-auto w-[300px] h-[70px] text-xl rounded-full text-white font-semibold border-2 border-white hover:bg-white hover:text-black transition duration-300"
+                >
                   Créer son compte club
                 </button>
               </div>
@@ -315,11 +453,15 @@ function App() {
             Téléchargez votre application HoopSphere
           </h2>
           <p className="text-xl sm:text-2xl mb-8 max-w-4xl">
-            Accédez à toutes les fonctionnalités de HoopSphere où que vous soyez
+            Accédez à toutes les fonctionnalités de HoopSphere où que vous soyez.
             Suivez vos performances, échangez avec la communauté et ne manquez
             aucune opportunité basket.
           </p>
-          <button className="bg-[#F56B1E] text-2xl w-[200px] h-[60px] text-white px-8 py-3 rounded-xl hover:bg-orange-600 transition-colors">
+          <button
+            type="button"
+            onClick={openDownloadModal}
+            className="bg-[#F56B1E] text-2xl w-[200px] h-[60px] text-white px-8 py-3 rounded-xl hover:bg-orange-600 transition-colors"
+          >
             Télécharger
           </button>
         </div>
@@ -355,6 +497,206 @@ function App() {
           {status && <p className="mt-4 text-sm">{status}</p>}
         </div>
       </section>
+
+      {/* Section FAQ */}
+      <section className="relative overflow-hidden bg-[#151415] py-20 text-white">
+        <div className="pointer-events-none absolute -left-24 top-20 h-64 w-64 rounded-full bg-[#2E4E9C]/35 blur-3xl" />
+        <div className="pointer-events-none absolute -right-20 bottom-10 h-72 w-72 rounded-full bg-[#F56B1E]/30 blur-3xl" />
+
+        <div className="relative mx-auto max-w-6xl px-6">
+          <div className="mx-auto mb-12 max-w-3xl text-center">
+            <span className="inline-flex items-center rounded-full border border-[#F56B1E]/50 bg-[#F56B1E]/15 px-4 py-1 text-sm font-semibold uppercase tracking-[0.2em] text-[#F56B1E]">
+              FAQ
+            </span>
+            <h2 className="mt-6 text-4xl font-bold leading-tight sm:text-5xl">
+              Questions fréquentes
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-lg text-white/70 sm:text-xl">
+              Toutes les réponses essentielles pour démarrer sur HoopSphere en
+              toute confiance.
+            </p>
+          </div>
+
+          <div className="mx-auto grid max-w-4xl gap-4">
+            {faqItems.map((item, index) => {
+              const isOpen = openFaqIndex === index;
+
+              return (
+                <article
+                  key={item.q}
+                  className={`rounded-2xl border transition-all duration-300 ${
+                    isOpen
+                      ? "border-[#F56B1E]/60 bg-gradient-to-r from-[#222324] to-[#1a1b1d] shadow-[0_20px_45px_rgba(245,107,30,0.18)]"
+                      : "border-white/10 bg-[#1f2022]/85 hover:border-[#F56B1E]/30 hover:bg-[#232427]"
+                  }`}
+                >
+                  <button
+                    type="button"
+                    className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+                    aria-expanded={isOpen}
+                    onClick={() =>
+                      setOpenFaqIndex(isOpen ? null : index)
+                    }
+                  >
+                    <span className="text-base font-semibold leading-relaxed sm:text-xl">
+                      {item.q}
+                    </span>
+                    <span
+                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
+                        isOpen
+                          ? "bg-[#F56B1E] text-black"
+                          : "bg-white/10 text-white"
+                      }`}
+                    >
+                      <FaChevronDown
+                        className={`text-sm transition-transform duration-300 ${
+                          isOpen ? "rotate-180" : ""
+                        }`}
+                      />
+                    </span>
+                  </button>
+
+                  <div
+                    className={`grid transition-all duration-300 ${
+                      isOpen
+                        ? "grid-rows-[1fr] px-6 pb-6 opacity-100"
+                        : "grid-rows-[0fr] px-6 opacity-0"
+                    }`}
+                  >
+                    <div className="overflow-hidden">
+                      <p className="border-t border-white/10 pt-5 text-sm leading-relaxed text-white/80 sm:text-lg">
+                        {item.a}
+                      </p>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <Modal
+        isOpen={isDownloadModalOpen}
+        onClose={closeDownloadModal}
+        title="Télécharger HoopSphere"
+        maxWidthClassName="max-w-5xl"
+      >
+        <div className="grid gap-6 md:grid-cols-2 md:gap-8">
+          <div className="rounded-2xl border border-[#F56B1E]/30 bg-white/[0.03] p-5 sm:p-6">
+            <h4 className="text-xl font-bold text-[#F56B1E]">
+              Android - Accès bêta
+            </h4>
+            <p className="mt-3 text-sm leading-relaxed text-white/80 sm:text-base">
+              L'application Android est en phase de beta testing. Remplissez ce
+              formulaire pour demander un accès anticipé.
+            </p>
+
+            <form onSubmit={handleBetaSubmit} className="mt-5">
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <label className="flex flex-col gap-2 text-sm font-medium text-white/85">
+                  Prénom
+                  <input
+                    type="text"
+                    required
+                    autoComplete="given-name"
+                    value={betaFormData.firstName}
+                    onChange={(event) =>
+                      setBetaFormData((previous) => ({
+                        ...previous,
+                        firstName: event.target.value,
+                      }))
+                    }
+                    className="h-11 rounded-xl border border-white/15 bg-white/5 px-4 text-sm text-white outline-none transition focus:border-[#F56B1E]/70 focus:bg-white/[0.08]"
+                  />
+                </label>
+
+                <label className="flex flex-col gap-2 text-sm font-medium text-white/85">
+                  Nom
+                  <input
+                    type="text"
+                    required
+                    autoComplete="family-name"
+                    value={betaFormData.lastName}
+                    onChange={(event) =>
+                      setBetaFormData((previous) => ({
+                        ...previous,
+                        lastName: event.target.value,
+                      }))
+                    }
+                    className="h-11 rounded-xl border border-white/15 bg-white/5 px-4 text-sm text-white outline-none transition focus:border-[#F56B1E]/70 focus:bg-white/[0.08]"
+                  />
+                </label>
+              </div>
+
+              <label className="mt-3 flex flex-col gap-2 text-sm font-medium text-white/85">
+                Email
+                <input
+                  type="email"
+                  required
+                  autoComplete="email"
+                  value={betaFormData.email}
+                  onChange={(event) =>
+                    setBetaFormData((previous) => ({
+                      ...previous,
+                      email: event.target.value,
+                    }))
+                  }
+                  className="h-11 rounded-xl border border-white/15 bg-white/5 px-4 text-sm text-white outline-none transition focus:border-[#F56B1E]/70 focus:bg-white/[0.08]"
+                />
+              </label>
+
+              {betaStatus && (
+                <p
+                  className={`mt-4 rounded-xl border px-4 py-3 text-sm ${
+                    betaStatus.type === "success"
+                      ? "border-emerald-400/35 bg-emerald-500/10 text-emerald-200"
+                      : "border-red-400/35 bg-red-500/10 text-red-200"
+                  }`}
+                >
+                  {betaStatus.message}
+                </p>
+              )}
+
+              <div className="mt-5 flex flex-wrap justify-end gap-3">
+                <button
+                  type="submit"
+                  disabled={isBetaSubmitting}
+                  className="h-11 rounded-xl bg-[#F56B1E] px-5 text-sm font-semibold text-black transition hover:bg-[#ff7f34] disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {isBetaSubmitting ? "Envoi..." : "Demander l'accès bêta"}
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div className="rounded-2xl border border-[#2E4E9C]/45 bg-gradient-to-br from-[#233976]/35 to-[#151415]/20 p-5 sm:p-6">
+            <h4 className="text-xl font-bold text-[#7ca2ff]">
+              iOS - Bientôt disponible
+            </h4>
+            <p className="mt-3 text-sm leading-relaxed text-white/80 sm:text-base">
+              L'application iOS HoopSphere est actuellement en cours de
+              développement et sera disponible prochainement sur l'App Store.
+            </p>
+            <div className="mt-5 rounded-xl border border-white/10 bg-black/20 p-4">
+              <p className="text-sm text-white/70">
+                Nous annoncerons la sortie officielle iOS dès que l'application
+                sera prête.
+              </p>
+            </div>
+            <div className="mt-6 flex justify-end">
+              <button
+                type="button"
+                onClick={closeDownloadModal}
+                className="h-11 rounded-xl border border-white/25 px-5 text-sm font-semibold text-white transition hover:border-white/45 hover:bg-white/10"
+              >
+                Fermer
+              </button>
+            </div>
+          </div>
+        </div>
+      </Modal>
+
       <footer className="bg-[#151415] text-white">
         <div className="mx-auto px-8 flex flex-col md:flex-row flex-wrap justify-around items-center md:items-center text-center md:text-left py-10 gap-10">
           {/* Logo */}
@@ -370,20 +712,29 @@ function App() {
           <div>
             <ul className="flex flex-col sm:flex-row justify-center flex-wrap md:justify-center items-center text-m xs:text-xl text-white uppercase space-y-2 sm:space-y-0 sm:space-x-4 text-center">
               <li className="flex items-center">
-                <span className="hover:text-white cursor-pointer whitespace-nowrap">
+                <a
+                  href="/mentions-legales"
+                  className="hover:text-white cursor-pointer whitespace-nowrap"
+                >
                   Mentions légales
-                </span>
+                </a>
               </li>
               <span className="hidden sm:inline">-</span>
               <li className="flex items-center">
-                <span className="hover:text-white cursor-pointer whitespace-nowrap">
+                <a
+                  href="/politique-confidentialite"
+                  className="hover:text-white cursor-pointer whitespace-nowrap"
+                >
                   Politique de confidentialité
                   <wbr /> des données
-                </span>
+                </a>
               </li>
               <span className="hidden sm:inline">-</span>
               <li className="flex items-center">
-                <span className="hover:text-white cursor-pointer whitespace-nowrap">
+                <span
+                  onClick={() => window._axcb?.showSettings?.()}
+                  className="hover:text-white cursor-pointer whitespace-nowrap"
+                >
                   Gestion cookies
                 </span>
               </li>
@@ -401,15 +752,14 @@ function App() {
             >
               <FaLinkedin className="text-black text-4xl" />
             </a>
-            <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Lien vers Facebook"
+            <button
+              type="button"
+              aria-label="Page Facebook bientôt disponible"
+              title="Page Facebook bientôt disponible"
               className="flex items-center justify-center w-16 h-16 rounded-full bg-[#F56B1E] hover:bg-orange-500"
             >
               <FaFacebookF className="text-black text-4xl" />
-            </a>
+            </button>
             <a
               href="https://www.instagram.com/hoopsphere_fr/"
               target="_blank"
@@ -429,7 +779,7 @@ function App() {
           <span>TOUS DROITS RÉSERVÉS</span>
         </div>
       </footer>
-    </div>
+  </div>
   );
 }
 
