@@ -83,7 +83,7 @@ function App() {
               }`}
             >
               <button
-                aria-label="Télécharger l'application HoopSphère"
+                aria-label="Télécharger l'application HoopSphere"
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
                 className={`relative w-[140px] xs400:w-[200px] md:w-[320px] h-[50px] md:h-[68px] px-5 md:px-6 text-base md:text-xl rounded-full text-white font-bold overflow-hidden flex items-center justify-center transition-colors duration-300 ${
@@ -101,7 +101,7 @@ function App() {
                       : "-translate-y-10 opacity-0"
                   }`}
                 >
-                  Commencer HoopSphère
+                  Commencer HoopSphere
                 </span>
                 <span
                   className={`absolute hidden md:block transition-all duration-500 ${
@@ -136,7 +136,7 @@ function App() {
             <h1 className="text-2xl xs400:text-4xl sm:text-5xl md:text-7xl font-extrabold mb-8 flex flex-col gap-4">
               <span>Réseau, progression, succès !</span>
               <span>Tout commence avec</span>
-              <span>HoopSphère !</span>
+              <span>HoopSphere !</span>
             </h1>
             <div className="text-lg xs400:text-2xl sm:text-3xl mb-10 flex flex-col gap-8">
               <p className="leading-relaxed">
@@ -146,7 +146,7 @@ function App() {
                 passer ton jeu au niveau supérieur.
               </p>
               <p className="leading-relaxed">
-                Télécharge HoopSphère dès maintenant !<br />
+                Télécharge HoopSphere dès maintenant !<br />
                 Le monde du basketball t’attend !
               </p>
             </div>
@@ -296,7 +296,7 @@ function App() {
           <div className="order-2 flex justify-center lg:justify-center">
             <img
               src="/img/iphonenew.png"
-              alt="Aperçu de l'application HoopSphère sur smartphone"
+              alt="Aperçu de l'application HoopSphere sur smartphone"
               className="w-[300px] sm:w-[400px] md:w-[550px] min-w-0 mr-0 2xl:mr-20 animate-float pointer-events-none"
             />
           </div>
@@ -312,10 +312,10 @@ function App() {
         <div className="absolute inset-0 bg-[#151414B2]"></div>
         <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4">
           <h2 className="text-4xl sm:text-5xl font-semibold mb-9">
-            Téléchargez votre application HoopSphère
+            Téléchargez votre application HoopSphere
           </h2>
           <p className="text-xl sm:text-2xl mb-8 max-w-4xl">
-            Accédez à toutes les fonctionnalités de HoopSphère où que vous soyez
+            Accédez à toutes les fonctionnalités de HoopSphere où que vous soyez
             Suivez vos performances, échangez avec la communauté et ne manquez
             aucune opportunité basket.
           </p>
@@ -331,7 +331,7 @@ function App() {
           </h2>
           <p className="my-10 text-xl sm:text-2xl max-w-4xl mx-auto">
             Recevez les dernières actualités, événements et nouveautés de
-            HoopSphère directement dans votre boîte mail.
+            HoopSphere directement dans votre boîte mail.
           </p>
           <form
             onSubmit={handleSubmit}
@@ -361,7 +361,7 @@ function App() {
           <div className="flex flex-col items-center md:items-start">
             <img
               src="/img/LOGO-H.png"
-              alt="HoopSphère Logo"
+              alt="HoopSphere Logo"
               className="w-[20rem] object-contain"
             />
           </div>
@@ -393,7 +393,7 @@ function App() {
           {/* Réseaux sociaux */}
           <div className="flex justify-center md:justify-end space-x-6">
             <a
-              href="#"
+              href="https://www.linkedin.com/company/hoopsphere/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Lien vers LinkedIn"
@@ -424,7 +424,7 @@ function App() {
 
         {/* Copyright */}
         <div className="flex flex-col sm:flex-row justify-center items-center text-s gap-4 py-4 text-white/80">
-          <span>COPYRIGHT © {new Date().getFullYear()} HoopSphère</span>
+          <span>COPYRIGHT © {new Date().getFullYear()} HoopSphere</span>
           <span className="hidden sm:inline">|</span>
           <span>TOUS DROITS RÉSERVÉS</span>
         </div>
