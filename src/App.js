@@ -16,28 +16,28 @@ const BETA_RECIPIENT_EMAIL = "hoopsphere.fr@gmail.com";
 
 const faqItems = [
   {
-    q: "HoopSphère est-elle gratuite ?",
-    a: "Oui, l'application est entièrement gratuite au téléchargement et à l'utilisation. Des fonctionnalités premium pourront être proposées ultérieurement.",
+    q: "HoopSphere est-elle gratuite ?",
+    a: "HoopSphere fonctionne avec un modèle freemium. Les fonctionnalités essentielles sont accessibles gratuitement, et une version Premium ajoute des options avancées de visibilité et d'analyse.",
   },
   {
     q: "Sur quelles plateformes l'application est-elle disponible ?",
-    a: "HoopSphère est disponible sur iOS (App Store) et Android (Google Play). Téléchargez-la dès maintenant pour commencer votre expérience basket.",
+    a: "HoopSphere est disponible sur Android en accès bêta. La version iOS arrive prochainement. Les deux versions sont conçues pour offrir la même expérience cross-platform.",
   },
   {
-    q: "Comment créer mon profil joueur ?",
-    a: "Téléchargez l'application, inscrivez-vous avec votre email, puis complétez votre profil avec vos statistiques, votre poste et vos objectifs.",
+    q: "Comment fonctionne l'inscription sur HoopSphere ?",
+    a: "À l'inscription, vous choisissez votre rôle (joueur ou club). L'interface s'adapte ensuite à votre usage: profil sportif détaillé, publication d'offres, candidatures et suivi des performances.",
   },
   {
-    q: "Les clubs peuvent-ils recruter via HoopSphère ?",
-    a: "Absolument ! Les clubs accèdent à une base de joueurs avec profils détaillés et statistiques pour faciliter le recrutement.",
+    q: "Peut-on importer des statistiques de match ?",
+    a: "Oui. Les joueurs peuvent importer un PDF e-Marque pour intégrer automatiquement leurs statistiques officielles de match sur leur profil.",
   },
   {
-    q: "Mes données personnelles sont-elles protégées ?",
-    a: "Oui, HoopSphère respecte le RGPD et la réglementation française en matière de protection des données. Consultez notre politique de confidentialité pour plus de détails.",
+    q: "Les clubs peuvent-ils recruter directement sur l'application ?",
+    a: "Oui. Les clubs publient des offres de recrutement, reçoivent les candidatures des joueurs et contactent les profils directement via la messagerie intégrée.",
   },
   {
-    q: "Comment contacter l'équipe HoopSphère ?",
-    a: "Vous pouvez nous contacter via nos réseaux sociaux (Instagram, Facebook, LinkedIn) ou directement dans l'application.",
+    q: "Quelles fonctionnalités de visibilité sont proposées ?",
+    a: "Les joueurs peuvent publier des vidéos (highlights), obtenir des vues, likes et favoris, et gagner en visibilité via le classement. La version Premium renforce cette mise en avant.",
   },
 ];
 
@@ -54,6 +54,48 @@ function App() {
     lastName: "",
     email: "",
   });
+
+  useEffect(() => {
+    const scrollToCurrentHash = (behavior = "auto") => {
+      const hash = window.location.hash;
+      if (!hash) {
+        return;
+      }
+
+      const targetId = hash.replace("#", "");
+      const target = document.getElementById(targetId);
+      if (!target) {
+        return;
+      }
+
+      const stickyNav = document.querySelector("nav");
+      const navOffset = stickyNav?.offsetHeight ?? 0;
+      const top = target.getBoundingClientRect().top + window.scrollY - navOffset - 12;
+
+      window.scrollTo({ top, behavior });
+    };
+
+    let attempts = 0;
+    const maxAttempts = 12;
+    const interval = setInterval(() => {
+      attempts += 1;
+      scrollToCurrentHash("auto");
+      if (!window.location.hash || document.getElementById(window.location.hash.slice(1)) || attempts >= maxAttempts) {
+        clearInterval(interval);
+      }
+    }, 120);
+
+    const handleHashChange = () => {
+      scrollToCurrentHash("smooth");
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -173,6 +215,7 @@ function App() {
             src="/img/btnGooglePlay.png"
             className={`${size} h-auto`}
             alt="Google Play"
+            decoding="async"
           />
         </button>
 
@@ -186,6 +229,7 @@ function App() {
             src="/img/btnAppStore.png"
             className={`${size} h-auto`}
             alt="App Store"
+            decoding="async"
           />
         </button>
       </div>
@@ -194,16 +238,17 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <nav className="bg-[#202020] px-2 md:px-14 pt-4 pb-4 flex justify-between items-center sticky top-0 z-50">
+      <nav className="bg-[#202020] px-3 sm:px-5 lg:px-10 py-2 sm:py-2.5 flex justify-between items-center sticky top-0 z-50">
         <div className="text-white text-xl font-semibold flex items-center w-full md:w-auto">
           <img
             src="/img/LOGO-H.png"
             alt="Logo hoopsphere symbole"
-            className="w-[10rem] h-[5rem] md:w-[13.5rem] md:h-[6.5rem] ml-2 md:ml-14"
+            className="w-[6.8rem] sm:w-[7.8rem] md:w-[9rem] lg:w-[9.8rem] h-auto ml-1"
+            decoding="async"
           />
         </div>
 
-        <ul className="flex items-center justify-end text-base mr-2 md:mr-14">
+        <ul className="flex items-center justify-end text-base mr-1 sm:mr-2">
           <li>
             <div
               className={`p-[2px] rounded-full inline-block transition-all duration-300 ${
@@ -217,7 +262,7 @@ function App() {
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
                 onClick={openDownloadModal}
-                className={`relative w-[140px] xs400:w-[200px] md:w-[320px] h-[50px] md:h-[68px] px-5 md:px-6 text-base md:text-xl rounded-full text-white font-bold overflow-hidden flex items-center justify-center transition-colors duration-300 ${
+                className={`relative w-[128px] xs400:w-[160px] sm:w-[190px] md:w-[220px] lg:w-[255px] h-[40px] sm:h-[44px] md:h-[50px] lg:h-[56px] px-4 md:px-5 text-xs sm:text-sm md:text-base rounded-full text-white font-bold overflow-hidden flex items-center justify-center transition-colors duration-300 ${
                   hovered ? "bg-[#F56B1E]" : "bg-[#1b1b1b]"
                 }`}
               >
@@ -250,7 +295,7 @@ function App() {
       </nav>
       {/* SECTION HERO */}
       <div
-        className="img_back w-full h-screen bg-no-repeat bg-cover text-white relative flex items-center overflow-hidden"
+        className="img_back w-full min-h-[72vh] sm:min-h-[78vh] lg:min-h-[82vh] bg-no-repeat bg-cover text-white relative flex items-center overflow-hidden"
         style={{
           backgroundImage: "url('/img/img_back-min.jpg')",
           backgroundPosition: "center top",
@@ -262,23 +307,24 @@ function App() {
         <div className="absolute inset-0 bg-gradient-to-l from-[#F56B1E] to-transparent opacity-80 z-0" />
 
         {/* Contenu */}
-        <div className="relative z-10 px-2 xs400:px-6 sm:px-8 md:px-12 max-w-6xl xl:ml-[150px] flex flex-col gap-10 text-center xs:text-left">
+        <div className="relative z-10 px-3 xs400:px-6 sm:px-8 md:px-10 lg:px-14 max-w-6xl xl:ml-[100px] flex flex-col gap-8 md:gap-10 text-center xs:text-left">
           <div>
-            <h1 className="text-2xl xs400:text-4xl sm:text-5xl md:text-7xl font-extrabold mb-8 flex flex-col gap-4">
+            <h2 className="text-[clamp(1.7rem,4.2vw,3.8rem)] font-extrabold mb-5 sm:mb-6 flex flex-col gap-2 leading-[1.08]">
               <span>Réseau, progression, succès !</span>
               <span>Tout commence avec</span>
               <span>HoopSphere !</span>
-            </h1>
-            <div className="text-lg xs400:text-2xl sm:text-3xl mb-10 flex flex-col gap-8">
+            </h2>
+            <div className="text-base xs400:text-lg sm:text-xl lg:text-[1.45rem] mb-8 sm:mb-9 flex flex-col gap-4 sm:gap-6">
               <p className="leading-relaxed">
-                Que tu sois joueur, coach ou club, notre application te connecte
-                aux meilleurs talents et opportunités. Trouve des équipes,
-                repère des recrues, participe à des événements exclusifs et fais
-                passer ton jeu au niveau supérieur.
+                HoopSphere digitalise le recrutement basket en connectant
+                joueurs, clubs et entraîneurs sur une seule plateforme. Créez
+                un profil structuré, publiez des offres, candidatez rapidement
+                et échangez directement via la messagerie intégrée.
               </p>
               <p className="leading-relaxed">
-                Télécharge HoopSphere dès maintenant !<br />
-                Le monde du basketball t’attend !
+                Importez vos statistiques officielles via PDF e-Marque, mettez
+                en avant vos performances vidéo et gagnez en visibilité grâce au
+                classement HoopSphere.
               </p>
             </div>
             <ResponsiveStoreButtons
@@ -287,6 +333,64 @@ function App() {
           </div>
         </div>
       </div>
+
+      <section className="bg-white py-14 sm:py-16 text-[#171717]">
+        <div className="mx-auto max-w-6xl px-4 sm:px-8">
+          <div className="rounded-2xl border border-[#E4E7F0] bg-[#F7F9FD] p-5 sm:p-8">
+            <span className="inline-flex items-center rounded-full bg-[#2542A5]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-[#2542A5]">
+              Suivi & recrutement
+            </span>
+
+            <h1 className="mt-4 text-[clamp(1.7rem,4.4vw,2.9rem)] font-extrabold leading-tight text-[#121212]">
+              Application de suivi de basket
+            </h1>
+
+            <p className="mt-4 max-w-4xl text-base sm:text-lg leading-relaxed text-[#2d3139]">
+              HoopSphere est une application de suivi de basket dédiée aux
+              joueurs, coachs et clubs. Elle centralise les profils, les
+              statistiques et les opportunités de recrutement pour structurer la
+              mise en relation sportive.
+            </p>
+
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              <article className="rounded-xl border border-[#D9DEEA] bg-white p-5 transition-transform duration-300 hover:-translate-y-1">
+                <h2 className="text-xl sm:text-2xl font-bold text-[#111827]">
+                  Une application de statistiques basket complète
+                </h2>
+                <p className="mt-3 text-sm sm:text-base leading-relaxed text-[#323a47]">
+                  Grâce à l'import PDF e-Marque, les joueurs ajoutent
+                  automatiquement leurs statistiques officielles de match.
+                  Points, passes, rebonds et efficacité sont mis à jour
+                  rapidement pour faciliter l'analyse de performance.
+                </p>
+              </article>
+
+              <article className="rounded-xl border border-[#D9DEEA] bg-white p-5 transition-transform duration-300 hover:-translate-y-1">
+                <h2 className="text-xl sm:text-2xl font-bold text-[#111827]">
+                  Pourquoi utiliser HoopSphere ?
+                </h2>
+                <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm sm:text-base text-[#323a47]">
+                  <li>Profils joueurs et clubs détaillés</li>
+                  <li>Import automatique des statistiques e-Marque</li>
+                  <li>Publication d'offres et candidatures en quelques clics</li>
+                  <li>Feed vidéo, classement et messagerie professionnelle</li>
+                </ul>
+              </article>
+            </div>
+
+            <p className="mt-5 text-sm sm:text-base text-[#3f4755]">
+              Pour aller plus loin, consultez aussi notre page dédiée{" "}
+              <a
+                href="/application-suivi-basket"
+                className="font-semibold text-[#F56B1E] underline underline-offset-4 hover:text-[#ff8a47]"
+              >
+                application suivi basket
+              </a>
+              .
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* Section Joueurs / Entraîneurs / Clubs */}
       <section className="bg-white py-20">
@@ -307,13 +411,13 @@ function App() {
               <div className="absolute inset-0 flex flex-col items-center justify-between px-6 py-6 text-white text-center transition-all duration-500 bg-black/50 backdrop-blur-md opacity-0 group-hover:opacity-100 z-30">
                 <div className="mt-[7.2rem]">
                   <p className="text-xl font-light leading-relaxed">
-                    HoopSphere booste chaque joueur en offrant un suivi
-                    personnalisé de ses statistiques, tout en connectant coaches
-                    et clubs pour une progression continue.
+                    Crée ton profil complet, importe tes stats officielles
+                    e-Marque, publie tes highlights vidéo et candidate aux
+                    offres des clubs dans un seul espace.
                     <br />
                     <br />
-                    Chaque joueur peut ainsi se dépasser et viser de nouveaux
-                    horizons.
+                    HoopSphere t'aide à gagner en visibilité et à transformer
+                    tes performances en opportunités concrètes.
                   </p>
                 </div>
                 <button
@@ -343,12 +447,13 @@ function App() {
               <div className="absolute inset-0 flex flex-col items-center justify-between px-6 py-6 text-white text-center transition-all duration-500 bg-black/50 backdrop-blur-md opacity-0 group-hover:opacity-100 z-30">
                 <div className="mt-[7.2rem]">
                   <p className="text-xl font-light leading-relaxed">
-                    HoopSphere permet aux clubs de recruter plus facilement en
-                    accédant à un réseau de joueurs et de coachs qualifiés.
+                    Publiez vos offres de recrutement, consultez des profils
+                    structurés et suivez les candidatures des joueurs en temps
+                    réel.
                     <br />
                     <br />
-                    Grâce à des profils détaillés et des statistiques précises,
-                    chaque club peut renforcer ses équipes efficacement.
+                    Avec HoopSphere, votre scouting devient plus rapide, plus
+                    fiable et mieux organisé.
                   </p>
                 </div>
                 <button
@@ -384,58 +489,59 @@ function App() {
       </section>
 
       {/* Section Présentation App */}
-      <section className="bg-gradient-to-r from-[#2542A5] via-[#2E4E9C] to-[#F56B1E] py-24 relative overflow-hidden">
-        <div className="relative z-10 mx-4 sm:mx-8 md:mx-10 px-4 sm:px-8 md:px-12 grid grid-cols-1 custom:grid-cols-2 gap-16 items-center text-white">
+      <section className="bg-gradient-to-r from-[#2542A5] via-[#2E4E9C] to-[#F56B1E] py-14 sm:py-16 lg:py-20 relative overflow-hidden">
+        <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-8 lg:px-10 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center text-white">
           {/* Bloc Texte */}
-          <div className="order-1 space-y-10 text-center lg:text-left 2xl:ml-[200px]">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
+          <div className="order-2 lg:order-1 space-y-6 text-left">
+            <h2 className="text-[clamp(1.7rem,4vw,3.2rem)] font-bold leading-tight">
               La plateforme qui connecte <br /> et propulse le basket !
             </h2>
-            <p className="text-lg sm:text-xl font-bold">
-              Que vous soyez joueur, coach ou club, HoopSphere révolutionne
-              votre façon d’évoluer dans le monde du basket.
+            <p className="text-base sm:text-lg lg:text-xl font-bold">
+              HoopSphere modernise le recrutement basket avec une approche
+              digitale, structurée et orientée performance.
             </p>
-            <p className="text-base sm:text-lg">
-              Suivi des performances, mises en relation stratégiques et
-              opportunités de recrutement : tout est réuni pour vous aider à
-              atteindre vos objectifs.
+            <p className="text-sm sm:text-base lg:text-lg">
+              Profils détaillés, statistiques officielles, offres de clubs,
+              candidatures simplifiées et messagerie sécurisée : tout est réuni
+              pour accélérer la mise en relation entre talents et recruteurs.
             </p>
-            <p className="text-lg sm:text-xl font-bold">
-              Rejoignez une communauté dynamique et donnez un nouvel élan à
-              votre parcours !
+            <p className="text-base sm:text-lg lg:text-xl font-bold">
+              Version gratuite pour démarrer, options Premium pour booster votre
+              visibilité et affiner votre analyse.
             </p>
 
-            <ul className="list-decimal list-inside space-y-4 text-base sm:text-lg text-left lg:text-left">
+            <ul className="list-decimal list-inside space-y-3 text-sm sm:text-base lg:text-lg">
               <li>
-                Créez votre profil – Joueur, coach ou club, présentez votre
-                parcours et vos objectifs.
+                Créez votre profil - Joueur ou club, structurez vos informations
+                clés et vos objectifs.
               </li>
               <li>
-                Suivez vos performances – Accédez à des statistiques détaillées
-                pour analyser et améliorer votre jeu.
+                Importez vos stats officielles - Analyse automatique via PDF
+                e-Marque pour un suivi fiable.
               </li>
               <li>
-                Élargissez votre réseau – Connectez-vous avec des coaches,
-                joueurs et clubs pour saisir de nouvelles opportunités.
+                Publiez ou consultez des offres - Les clubs recrutent, les
+                joueurs candidatent en quelques clics.
               </li>
               <li>
-                Trouvez la bonne opportunité – Rejoignez une équipe, recrutez
-                des talents ou attirez les bonnes personnes.
+                Gagnez en visibilité - Feed vidéo, likes, vues, favoris et
+                classement des profils.
               </li>
               <li>
-                Progressez et atteignez vos objectifs – Avec HoopSphere,
-                repoussez vos limites et donnez un nouvel élan à votre carrière
-                basket !
+                Échangez rapidement - Messagerie interne pour des prises de
+                contact professionnelles.
               </li>
             </ul>
           </div>
 
           {/* Bloc Téléphone */}
-          <div className="order-2 flex justify-center lg:justify-center">
+          <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
             <img
               src="/img/iphonenew.png"
               alt="Aperçu de l'application HoopSphere sur smartphone"
-              className="w-[300px] sm:w-[400px] md:w-[550px] min-w-0 mr-0 2xl:mr-20 animate-float pointer-events-none"
+              className="w-[230px] sm:w-[300px] md:w-[360px] lg:w-[430px] min-w-0 animate-float pointer-events-none"
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </div>
@@ -453,9 +559,9 @@ function App() {
             Téléchargez votre application HoopSphere
           </h2>
           <p className="text-xl sm:text-2xl mb-8 max-w-4xl">
-            Accédez à toutes les fonctionnalités de HoopSphere où que vous soyez.
-            Suivez vos performances, échangez avec la communauté et ne manquez
-            aucune opportunité basket.
+            Rejoignez la plateforme qui centralise profils, statistiques,
+            recrutements et candidatures basket. Passez d'un réseau informel à
+            un outil pro pensé pour la performance et la visibilité.
           </p>
           <button
             type="button"
@@ -499,7 +605,10 @@ function App() {
       </section>
 
       {/* Section FAQ */}
-      <section className="relative overflow-hidden bg-[#151415] py-20 text-white">
+      <section
+        id="faq"
+        className="relative overflow-hidden bg-[#151415] py-20 text-white scroll-mt-28"
+      >
         <div className="pointer-events-none absolute -left-24 top-20 h-64 w-64 rounded-full bg-[#2E4E9C]/35 blur-3xl" />
         <div className="pointer-events-none absolute -right-20 bottom-10 h-72 w-72 rounded-full bg-[#F56B1E]/30 blur-3xl" />
 
@@ -705,6 +814,8 @@ function App() {
               src="/img/LOGO-H.png"
               alt="HoopSphere Logo"
               className="w-[20rem] object-contain"
+              loading="lazy"
+              decoding="async"
             />
           </div>
 
@@ -784,3 +895,4 @@ function App() {
 }
 
 export default App;
+

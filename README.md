@@ -7,6 +7,7 @@ The site presents the product value proposition for players, clubs, and coaches,
 
 The application uses path-based rendering (without React Router):
 - `/` renders the main landing page.
+- `/application-suivi-basket` and `/application-suivi-basket.html` render the dedicated SEO page.
 - `/mentions-legales` and `/mentions-legales.html` render legal notices.
 - `/politique-confidentialite` and `/politique-confidentialite.html` render the privacy policy.
 
@@ -34,8 +35,10 @@ The application uses path-based rendering (without React Router):
 - Footer "Gestion cookies" trigger calls `window._axcb?.showSettings?.()`.
 - Analytics and SEO:
 - Google Analytics 4 (`gtag`) with consent default denied.
-- Canonical, Open Graph, Twitter metadata, and JSON-LD schema in `public/index.html`.
-- `robots.txt` and `sitemap.xml` present.
+- Home metadata optimized for SEO in `public/index.html` (title, description, canonical, Open Graph, Twitter, JSON-LD).
+- Visible keyword-rich SEO content section added directly in `src/App.js` with one unique `H1`.
+- Dedicated indexable SEO page for basketball search intent: `/application-suivi-basket`.
+- `robots.txt` and `sitemap.xml` include crawl/indexation signals.
 
 ## Tech Stack
 - React 18 (Create React App)
@@ -108,6 +111,7 @@ Containerized stack:
 │   └── img/                        # landing visuals and brand assets
 ├── src/
 │   ├── App.js                      # main landing page and modal behaviors
+│   ├── ApplicationSuiviBasket.js   # dedicated SEO page (/application-suivi-basket)
 │   ├── components/
 │   │   └── Modal.js                # reusable modal component
 │   ├── MentionsLegales.js          # legal notices page
@@ -119,6 +123,7 @@ Containerized stack:
 ├── Dockerfile
 ├── docker-compose.yml
 ├── deploy.sh
+├── SEO.md                         # SEO checklist and off-page action plan
 ├── prometheus.yml
 ├── tailwind.config.js
 ├── postcss.config.js

@@ -25,12 +25,16 @@ Its goals are:
 - Contact and lead capture:
 - newsletter email submission via EmailJS,
 - beta candidate submission via EmailJS.
+- SEO page:
+- `/application-suivi-basket` and `/application-suivi-basket.html`,
 - Legal pages:
 - `/mentions-legales` and `/mentions-legales.html`,
 - `/politique-confidentialite` and `/politique-confidentialite.html`.
 - Cookie consent and settings action via Axeptio.
 - GA4 analytics setup with consent mode defaults.
 - SEO metadata, social metadata, canonical URL, JSON-LD, robots, sitemap.
+- One visible SEO section on landing with unique `H1` and keyword-rich copy.
+- Dedicated SEO content page (`/application-suivi-basket`) with long-form text and indexable metadata.
 
 ## Application Behavior
 - Entry point is `src/index.js`.
@@ -40,7 +44,9 @@ Its goals are:
 - FAQ uses accordion state (`openFaqIndex`),
 - Android button opens beta modal,
 - iOS button opens info modal,
-- footer cookie action opens Axeptio settings if available.
+- footer cookie action opens Axeptio settings if available,
+- visible SEO section is rendered directly on the landing page with basketball-focused terms.
+- `src/ApplicationSuiviBasket.js` sets page-specific SEO tags (title, description, canonical, robots, JSON-LD).
 - Legal pages (`MentionsLegales`, `PolitiqueConfidentialite`) set:
 - page title,
 - temporary `meta[name="robots"]="noindex"` while mounted.

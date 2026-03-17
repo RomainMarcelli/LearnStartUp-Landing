@@ -5,6 +5,7 @@ import App from './App';
 import GestionCookies from './GestionCookies';
 import MentionsLegales from './MentionsLegales';
 import PolitiqueConfidentialite from './PolitiqueConfidentialite';
+import ApplicationSuiviBasket from './ApplicationSuiviBasket';
 import reportWebVitals from './reportWebVitals';
 
 const normalizedPath = window.location.pathname.replace(/\/+$/, "") || "/";
@@ -15,6 +16,8 @@ const pageByPath = {
   "/politique-confidentialite.html": PolitiqueConfidentialite,
   "/gestion-cookies": GestionCookies,
   "/gestion-cookies.html": GestionCookies,
+  "/application-suivi-basket": ApplicationSuiviBasket,
+  "/application-suivi-basket.html": ApplicationSuiviBasket,
 };
 const ActivePage = pageByPath[normalizedPath] || App;
 

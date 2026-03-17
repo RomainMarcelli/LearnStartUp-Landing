@@ -9,7 +9,7 @@ function GestionCookies() {
 
   useEffect(() => {
     const previousTitle = document.title;
-    document.title = "Gestion des cookies — HoopSphère";
+    document.title = "Gestion des cookies — HoopSphere";
 
     const robotsMetaSelector = 'meta[name="robots"]';
     const existingRobotsMeta = document.querySelector(robotsMetaSelector);
@@ -61,7 +61,7 @@ function GestionCookies() {
         <p className="mb-3 text-[#cccccc]">
           Conformément à la réglementation française (loi Informatique et
           Libertés) et européenne (RGPD, directive ePrivacy), nous vous
-          informons de l'utilisation de cookies sur le site HoopSphère.
+          informons de l'utilisation de cookies sur le site HoopSphere.
         </p>
 
         <h2 className="mb-3 mt-8 text-2xl font-bold text-white">
@@ -180,7 +180,7 @@ function GestionCookies() {
           cookies :
         </p>
         <p className="mb-3 text-[#cccccc]">
-          La gestion du consentement sur le site HoopSphère est assurée par{" "}
+          La gestion du consentement sur le site HoopSphere est assurée par{" "}
           <strong>Axeptio</strong>. Les boutons ci-dessous ouvrent directement
           le centre de préférences Axeptio.
         </p>
@@ -297,3 +297,4 @@ function GestionCookies() {
 }
 
 export default GestionCookies;
+

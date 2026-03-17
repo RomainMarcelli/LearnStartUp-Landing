@@ -5,7 +5,7 @@ import SiteFooter from "./components/SiteFooter";
 function PolitiqueConfidentialite() {
   useEffect(() => {
     const previousTitle = document.title;
-    document.title = "Politique de confidentialité — HoopSphère";
+    document.title = "Politique de confidentialité — HoopSphere";
 
     const robotsMetaSelector = 'meta[name="robots"]';
     const existingRobotsMeta = document.querySelector(robotsMetaSelector);
@@ -43,7 +43,7 @@ function PolitiqueConfidentialite() {
         <p className="mb-8 text-[#999999]">Dernière mise à jour : mars 2026</p>
 
         <p className="mb-3 text-[#cccccc]">
-          HoopSphère s'engage à protéger la vie privée de ses utilisateurs.
+          HoopSphere s'engage à protéger la vie privée de ses utilisateurs.
           Cette politique de confidentialité décrit comment nous collectons,
           utilisons et protégeons vos données personnelles conformément au
           Règlement Général sur la Protection des Données (RGPD) et à la loi
@@ -57,7 +57,7 @@ function PolitiqueConfidentialite() {
           Le responsable du traitement des données est :
         </p>
         <p className="mb-3 text-[#cccccc]">
-          <strong>HoopSphère</strong> — Jonas Suhard
+          <strong>HoopSphere</strong> — Jonas Suhard
         </p>
         <p className="mb-3 text-[#cccccc]">
           Email :{" "}
@@ -235,3 +235,4 @@ function PolitiqueConfidentialite() {
 }
 
 export default PolitiqueConfidentialite;
+

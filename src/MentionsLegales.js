@@ -5,7 +5,7 @@ import SiteFooter from "./components/SiteFooter";
 function MentionsLegales() {
   useEffect(() => {
     const previousTitle = document.title;
-    document.title = "Mentions légales — HoopSphère";
+    document.title = "Mentions légales — HoopSphere";
 
     const robotsMetaSelector = 'meta[name="robots"]';
     const existingRobotsMeta = document.querySelector(robotsMetaSelector);
@@ -36,14 +36,14 @@ function MentionsLegales() {
       <LegalHeader
         active="mentions"
         title="Mentions légales"
-        subtitle="Informations légales et responsabilités liées au site HoopSphère."
+        subtitle="Informations légales et responsabilités liées au site HoopSphere."
       />
 
       <main className="mx-auto max-w-3xl px-6 py-10">
         <h2 className="mb-3 mt-8 text-2xl font-bold text-white">
           1. Éditeur du site
         </h2>
-        <p className="mb-3 text-[#cccccc]">Nom du site : HoopSphère</p>
+        <p className="mb-3 text-[#cccccc]">Nom du site : HoopSphere</p>
         <p className="mb-3 text-[#cccccc]">
           URL :{" "}
           <a
@@ -69,7 +69,7 @@ function MentionsLegales() {
           Directeur de la publication : Jonas Suhard
         </p>
         {/* TODO DEVS : Une fois la société immatriculée, ajouter ici :
-            - Raison sociale et forme juridique (ex : SAS HoopSphère)
+            - Raison sociale et forme juridique (ex : SAS HoopSphere)
             - Capital social
             - Adresse du siège social
             - Numéro RCS
@@ -96,14 +96,14 @@ function MentionsLegales() {
           3. Propriété intellectuelle
         </h2>
         <p className="mb-3 text-[#cccccc]">
-          L'ensemble du contenu du site HoopSphère (textes, images, logos,
+          L'ensemble du contenu du site HoopSphere (textes, images, logos,
           vidéos, graphismes, icônes) est protégé par le droit de la propriété
           intellectuelle. Toute reproduction, représentation, modification ou
           adaptation, totale ou partielle, est interdite sans autorisation
           préalable écrite.
         </p>
         <p className="mb-3 text-[#cccccc]">
-          Le logo et la marque HoopSphère sont des marques déposées. Leur
+          Le logo et la marque HoopSphere sont des marques déposées. Leur
           utilisation sans autorisation est interdite.
         </p>
 
@@ -111,13 +111,13 @@ function MentionsLegales() {
           4. Responsabilité
         </h2>
         <p className="mb-3 text-[#cccccc]">
-          HoopSphère met tout en œuvre pour assurer l'exactitude des
-          informations diffusées sur le site. Toutefois, HoopSphère ne saurait
+          HoopSphere met tout en œuvre pour assurer l'exactitude des
+          informations diffusées sur le site. Toutefois, HoopSphere ne saurait
           être tenu responsable des omissions, inexactitudes ou carences dans la
           mise à jour de ces informations.
         </p>
         <p className="mb-3 text-[#cccccc]">
-          HoopSphère décline toute responsabilité en cas de difficultés
+          HoopSphere décline toute responsabilité en cas de difficultés
           techniques liées à l'utilisation du site ou de l'application mobile.
         </p>
 
@@ -126,7 +126,7 @@ function MentionsLegales() {
         </h2>
         <p className="mb-3 text-[#cccccc]">
           Le site peut contenir des liens vers d'autres sites internet.
-          HoopSphère ne dispose d'aucun moyen de contrôle du contenu de ces
+          HoopSphere ne dispose d'aucun moyen de contrôle du contenu de ces
           sites tiers et n'assume aucune responsabilité quant à leur contenu.
         </p>
 
@@ -174,3 +174,4 @@ function MentionsLegales() {
 }
 
 export default MentionsLegales;
+

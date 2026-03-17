@@ -9,6 +9,8 @@ function SiteFooter() {
             src="/img/LOGO-H.png"
             alt="HoopSphere Logo"
             className="w-[20rem] object-contain"
+            loading="lazy"
+            decoding="async"
           />
         </div>
 

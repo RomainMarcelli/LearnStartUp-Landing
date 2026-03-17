@@ -14,7 +14,12 @@ function LegalHeader({ active = "mentions", title, subtitle }) {
       <div className="relative mx-auto flex max-w-5xl flex-col gap-6 px-4 py-6 sm:px-8 sm:py-8">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <a href="/" className="shrink-0">
-            <img src="/img/LOGO-H.png" alt="HoopSphère" className="h-[50px]" />
+            <img
+              src="/img/LOGO-H.png"
+              alt="HoopSphere"
+              className="h-[50px]"
+              decoding="async"
+            />
           </a>
           <div className="flex flex-wrap items-center gap-2">
             <a
@@ -53,3 +58,4 @@ function LegalHeader({ active = "mentions", title, subtitle }) {
 }
 
 export default LegalHeader;
+
