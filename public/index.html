@@ -5,6 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <script>
+      window.axeptioSettings = {
+        clientId: "69b3d836a194bcf1e40b1bd2",
+        cookiesVersion: "431ce79a-b568-4840-9a75-4c02e651abb0",
+        googleConsentMode: {
+          default: {
+            analytics_storage: "denied",
+            ad_storage: "denied",
+            ad_user_data: "denied",
+            ad_personalization: "denied",
+            wait_for_update: 500,
+          },
+        },
+      };
+      (function (d, s) {
+        var t = d.getElementsByTagName(s)[0],
+          e = d.createElement(s);
+        e.async = true;
+        e.src = "//static.axept.io/sdk.js";
+        t.parentNode.insertBefore(e, t);
+      })(document, "script");
+    </script>
     <!-- Google tag (gtag.js) -->
     <script
       async
@@ -15,7 +37,15 @@
       function gtag() {
         dataLayer.push(arguments);
       }
+
       gtag("js", new Date());
+
+      gtag("consent", "default", {
+        analytics_storage: "denied",
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+      });
 
       gtag("config", "G-X1P1JBMSTE", {
         page_path: window.location.pathname,
@@ -23,18 +53,18 @@
     </script>
 
     <!-- SEO PRINCIPAL -->
-    <title>HoopSphère — Propulse ton jeu</title>
+    <title>HoopSphere — Propulse ton jeu</title>
     <meta name="robots" content="index, follow" />
     <meta
       name="description"
-      content="HoopSphère connecte joueurs, coachs et clubs de basketball. Crée ton profil, suis tes performances et découvre de nouvelles opportunités près de chez toi."
+      content="HoopSphere connecte joueurs, coachs et clubs de basketball. Crée ton profil, suis tes performances et découvre de nouvelles opportunités près de chez toi."
     />
     <meta
       name="keywords"
       content="basketball, joueur, club, coach, statistiques, application basket, réseau sportif, hoopssphere, hoopshere, classement, match, jeu, panier, point, basket, passion, français"
     />
     <meta http-equiv="Content-Language" content="fr" />
-    <meta name="author" content="HoopSphère" />
+    <meta name="author" content="HoopSphere" />
     <meta name="theme-color" content="#202020" />
 
     <link rel="canonical" href="https://hoopsphere.fr/" />
@@ -47,20 +77,20 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://hoopsphere.fr/" />
-    <meta property="og:title" content="HoopSphère — Propulse ton jeu" />
+    <meta property="og:title" content="HoopSphere — Propulse ton jeu" />
     <meta
       property="og:description"
-      content="Joue, connecte, recrute : découvre HoopSphère, la plateforme dédiée aux passionnés de basketball."
+      content="Joue, connecte, recrute : découvre HoopSphere, la plateforme dédiée aux passionnés de basketball."
     />
     <!-- Pour le moment : pas d’URL absolue → l’image locale sera utilisée -->
     <meta property="og:image" content="https://hoopsphere.fr/preview.jpg" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:title" content="HoopSphère — Propulse ton jeu" />
+    <meta property="twitter:title" content="HoopSphere — Propulse ton jeu" />
     <meta
       property="twitter:description"
-      content="Joue, connecte, recrute : découvre HoopSphère, la plateforme dédiée aux passionnés de basketball."
+      content="Joue, connecte, recrute : découvre HoopSphere, la plateforme dédiée aux passionnés de basketball."
     />
     <meta
       property="twitter:image"
@@ -79,10 +109,10 @@
         {
           "@context": "https://schema.org",
           "@type": "SoftwareApplication",
-          "name": "HoopSphère",
+          "name": "HoopSphere",
           "creator": {
             "@type": "Organization",
-            "name": "HoopSphère"
+            "name": "HoopSphere"
           },
           "applicationCategory": "SportsApplication",
           "operatingSystem": "iOS, Android",
@@ -98,7 +128,7 @@
         {
           "@context": "https://schema.org",
           "@type": "Organization",
-          "name": "HoopSphère",
+          "name": "HoopSphere",
           "url": "https://hoopsphere.fr",
           "logo": "https://hoopsphere.fr/img/LOGO-SYMBOLE.png"
         }
@@ -107,7 +137,7 @@
   </head>
 
   <body>
-    <noscript>Activez JavaScript pour utiliser HoopSphère.</noscript>
+    <noscript>Activez JavaScript pour utiliser HoopSphere.</noscript>
     <div id="root"></div>
   </body>
 </html>
