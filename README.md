@@ -1,70 +1,131 @@
-# Getting Started with Create React App
+# HoopSphere Landing Page
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Overview
+HoopSphere Landing Page is a React single-page marketing website for the HoopSphere basketball platform.
 
-## Available Scripts
+The site presents the product value proposition for players, clubs, and coaches, provides app download entry points, captures leads (newsletter + Android beta testers), and exposes legal/privacy pages.
 
-In the project directory, you can run:
+The application uses path-based rendering (without React Router):
+- `/` renders the main landing page.
+- `/application-suivi-basket` and `/application-suivi-basket.html` render the dedicated SEO page.
+- `/mentions-legales` and `/mentions-legales.html` render legal notices.
+- `/politique-confidentialite` and `/politique-confidentialite.html` render the privacy policy.
 
-### `npm start`
+## Features
+- Responsive marketing landing page with multiple sections:
+- Sticky top navigation and animated CTA button.
+- Hero section with layered gradients and download buttons.
+- Persona cards for player, club, and coach contexts.
+- Product presentation section with animated floating phone visual.
+- Download CTA banner section.
+- Newsletter subscription form.
+- FAQ accordion section with animated expand/collapse.
+- Footer with legal links and social links.
+- Download button modal behavior:
+- Google Play button opens a beta registration modal.
+- Beta modal includes first name, last name, and email fields.
+- Beta form sends an email via EmailJS.
+- App Store button opens an iOS availability information modal.
+- Lead collection and messaging:
+- Newsletter form sends data via EmailJS.
+- Beta tester form sends data via EmailJS (same service/public key, dedicated template override supported).
+- Legal and privacy content pages implemented as React components.
+- Cookie consent and preferences integration:
+- Axeptio SDK initialized in `public/index.html`.
+- Footer "Gestion cookies" trigger calls `window._axcb?.showSettings?.()`.
+- Analytics and SEO:
+- Google Analytics 4 (`gtag`) with consent default denied.
+- Home metadata optimized for SEO in `public/index.html` (title, description, canonical, Open Graph, Twitter, JSON-LD).
+- Visible keyword-rich SEO content section added directly in `src/App.js` with one unique `H1`.
+- Dedicated indexable SEO page for basketball search intent: `/application-suivi-basket`.
+- `robots.txt` and `sitemap.xml` include crawl/indexation signals.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Tech Stack
+- React 18 (Create React App)
+- Tailwind CSS 3 + PostCSS + Autoprefixer
+- EmailJS (`emailjs-com`)
+- React Icons
+- Google Analytics (`gtag.js`)
+- Axeptio cookie consent SDK
+- Docker / Docker Compose
+- Prometheus + Grafana + cAdvisor + node-exporter + blackbox-exporter (monitoring stack in `docker-compose.yml`)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
+Prerequisites:
+- Node.js 18+ recommended
+- npm
 
-### `npm test`
+Install dependencies:
+```bash
+npm install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Run the app in development:
+```bash
+npm start
+```
 
-### `npm run build`
+Open `http://localhost:3000`.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Optional environment variable:
+- `REACT_APP_EMAILJS_BETA_TEMPLATE_ID`:
+- If set, this template ID is used for beta tester emails.
+- If not set, beta emails fallback to the newsletter template ID already used in the project.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Development
+Main scripts:
+- `npm start`: run development server.
+- `npm test -- --watchAll=false`: run tests once.
+- `npm run build`: production build.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Development notes:
+- The app does not use React Router. Route selection is done in `src/index.js` using `window.location.pathname`.
+- Tailwind utility classes are used directly in JSX.
+- `src/App.test.js` contains a basic UI presence test.
+- During tests, React 18 may log a known `act(...)` deprecation warning from testing-library internals.
 
-### `npm run eject`
+## Deployment
+Production build:
+```bash
+npm run build
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Repository deployment script:
+- `deploy.sh` builds the app, backs up current server files via SSH, uploads `build/`, then restarts Nginx.
+- The script currently contains hardcoded server settings (`SERVER_USER`, `SERVER_IP`, `SERVER_PATH`).
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Containerized stack:
+- `docker-compose.yml` defines:
+- `learnstartup` (React app)
+- monitoring services (`cadvisor`, `node-exporter`, `blackbox-exporter`, `prometheus`, `grafana`)
+- Prometheus targets are defined in `prometheus.yml`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Project Structure
+```text
+.
+├── public/
+│   ├── index.html                  # SEO, GA4, Axeptio, root mount
+│   ├── robots.txt
+│   ├── sitemap.xml
+│   ├── manifest.json
+│   └── img/                        # landing visuals and brand assets
+├── src/
+│   ├── App.js                      # main landing page and modal behaviors
+│   ├── ApplicationSuiviBasket.js   # dedicated SEO page (/application-suivi-basket)
+│   ├── components/
+│   │   └── Modal.js                # reusable modal component
+│   ├── MentionsLegales.js          # legal notices page
+│   ├── PolitiqueConfidentialite.js # privacy policy page
+│   ├── index.js                    # pathname-based page switch
+│   ├── index.css                   # tailwind directives + global custom CSS
+│   ├── App.test.js                 # UI smoke test
+│   └── reportWebVitals.js
+├── Dockerfile
+├── docker-compose.yml
+├── deploy.sh
+├── SEO.md                         # SEO checklist and off-page action plan
+├── prometheus.yml
+├── tailwind.config.js
+├── postcss.config.js
+└── package.json
+```

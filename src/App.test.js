@@ -1,8 +1,15 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen } from "@testing-library/react";
+import App from "./App";
 
-test('renders learn react link', () => {
+test("renders landing hero and download actions", () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  expect(
+    screen.getByRole("heading", { name: /Réseau, progression, succès/i })
+  ).toBeInTheDocument();
+  expect(
+    screen.getByRole("button", { name: /Ouvrir le formulaire beta Android/i })
+  ).toBeInTheDocument();
+  expect(
+    screen.getByRole("button", { name: /Voir la disponibilité iOS/i })
+  ).toBeInTheDocument();
 });
