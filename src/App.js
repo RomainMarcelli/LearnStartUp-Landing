@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import emailjs from "emailjs-com";
 import {
   FaChevronDown,
@@ -295,7 +295,7 @@ function App() {
       </nav>
       {/* SECTION HERO */}
       <div
-        className="img_back w-full min-h-[72vh] sm:min-h-[78vh] lg:min-h-[82vh] bg-no-repeat bg-cover text-white relative flex items-center overflow-hidden"
+        className="img_back w-full h-[calc(100svh-52px)] sm:h-[calc(100svh-56px)] lg:h-[calc(100svh-60px)] bg-no-repeat bg-cover text-white relative flex items-center overflow-hidden"
         style={{
           backgroundImage: "url('/img/img_back-min.jpg')",
           backgroundPosition: "center top",
@@ -333,64 +333,6 @@ function App() {
           </div>
         </div>
       </div>
-
-      <section className="bg-white py-14 sm:py-16 text-[#171717]">
-        <div className="mx-auto max-w-6xl px-4 sm:px-8">
-          <div className="rounded-2xl border border-[#E4E7F0] bg-[#F7F9FD] p-5 sm:p-8">
-            <span className="inline-flex items-center rounded-full bg-[#2542A5]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-[#2542A5]">
-              Suivi & recrutement
-            </span>
-
-            <h1 className="mt-4 text-[clamp(1.7rem,4.4vw,2.9rem)] font-extrabold leading-tight text-[#121212]">
-              Application de suivi de basket
-            </h1>
-
-            <p className="mt-4 max-w-4xl text-base sm:text-lg leading-relaxed text-[#2d3139]">
-              HoopSphere est une application de suivi de basket dédiée aux
-              joueurs, coachs et clubs. Elle centralise les profils, les
-              statistiques et les opportunités de recrutement pour structurer la
-              mise en relation sportive.
-            </p>
-
-            <div className="mt-6 grid gap-4 md:grid-cols-2">
-              <article className="rounded-xl border border-[#D9DEEA] bg-white p-5 transition-transform duration-300 hover:-translate-y-1">
-                <h2 className="text-xl sm:text-2xl font-bold text-[#111827]">
-                  Une application de statistiques basket complète
-                </h2>
-                <p className="mt-3 text-sm sm:text-base leading-relaxed text-[#323a47]">
-                  Grâce à l'import PDF e-Marque, les joueurs ajoutent
-                  automatiquement leurs statistiques officielles de match.
-                  Points, passes, rebonds et efficacité sont mis à jour
-                  rapidement pour faciliter l'analyse de performance.
-                </p>
-              </article>
-
-              <article className="rounded-xl border border-[#D9DEEA] bg-white p-5 transition-transform duration-300 hover:-translate-y-1">
-                <h2 className="text-xl sm:text-2xl font-bold text-[#111827]">
-                  Pourquoi utiliser HoopSphere ?
-                </h2>
-                <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm sm:text-base text-[#323a47]">
-                  <li>Profils joueurs et clubs détaillés</li>
-                  <li>Import automatique des statistiques e-Marque</li>
-                  <li>Publication d'offres et candidatures en quelques clics</li>
-                  <li>Feed vidéo, classement et messagerie professionnelle</li>
-                </ul>
-              </article>
-            </div>
-
-            <p className="mt-5 text-sm sm:text-base text-[#3f4755]">
-              Pour aller plus loin, consultez aussi notre page dédiée{" "}
-              <a
-                href="/application-suivi-basket"
-                className="font-semibold text-[#F56B1E] underline underline-offset-4 hover:text-[#ff8a47]"
-              >
-                application suivi basket
-              </a>
-              .
-            </p>
-          </div>
-        </div>
-      </section>
 
       {/* Section Joueurs / Entraîneurs / Clubs */}
       <section className="bg-white py-20">
@@ -492,7 +434,7 @@ function App() {
       <section className="bg-gradient-to-r from-[#2542A5] via-[#2E4E9C] to-[#F56B1E] py-14 sm:py-16 lg:py-20 relative overflow-hidden">
         <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-8 lg:px-10 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center text-white">
           {/* Bloc Texte */}
-          <div className="order-2 lg:order-1 space-y-6 text-left">
+          <div className="order-1 lg:order-1 space-y-6 text-left">
             <h2 className="text-[clamp(1.7rem,4vw,3.2rem)] font-bold leading-tight">
               La plateforme qui connecte <br /> et propulse le basket !
             </h2>
@@ -535,7 +477,7 @@ function App() {
           </div>
 
           {/* Bloc Téléphone */}
-          <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
+          <div className="order-2 lg:order-2 flex justify-center lg:justify-end mt-5">
             <img
               src="/img/iphonenew.png"
               alt="Aperçu de l'application HoopSphere sur smartphone"
@@ -543,6 +485,64 @@ function App() {
               loading="lazy"
               decoding="async"
             />
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#121827] py-14 sm:py-16 text-white">
+        <div className="mx-auto max-w-6xl px-4 sm:px-8">
+          <div className="rounded-2xl border border-white/10 bg-[#182236] p-5 sm:p-8 shadow-[0_20px_45px_rgba(0,0,0,0.35)]">
+            <span className="inline-flex items-center rounded-full bg-[#F56B1E]/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em] text-[#F56B1E]">
+              Suivi & recrutement
+            </span>
+
+            <h1 className="mt-4 text-[clamp(1.7rem,4.4vw,2.9rem)] font-extrabold leading-tight">
+              Application de suivi de basket
+            </h1>
+
+            <p className="mt-4 max-w-4xl text-base sm:text-lg leading-relaxed text-white/85">
+              HoopSphere est une application de suivi de basket dédiée aux
+              joueurs, coachs et clubs. Elle centralise les profils, les
+              statistiques et les opportunités de recrutement pour structurer la
+              mise en relation sportive.
+            </p>
+
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              <article className="rounded-xl border border-[#314D8F]/50 bg-[#1d2c4a] p-5 transition-transform duration-300 hover:-translate-y-1">
+                <h2 className="text-xl sm:text-2xl font-bold">
+                  Une application de statistiques basket complète
+                </h2>
+                <p className="mt-3 text-sm sm:text-base leading-relaxed text-white/80">
+                  Grâce à l'import PDF e-Marque, les joueurs ajoutent
+                  automatiquement leurs statistiques officielles de match.
+                  Points, passes, rebonds et efficacité sont mis à jour
+                  rapidement pour faciliter l'analyse de performance.
+                </p>
+              </article>
+
+              <article className="rounded-xl border border-[#F56B1E]/40 bg-[#2b2220] p-5 transition-transform duration-300 hover:-translate-y-1">
+                <h2 className="text-xl sm:text-2xl font-bold">
+                  Pourquoi utiliser HoopSphere ?
+                </h2>
+                <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm sm:text-base text-white/85">
+                  <li>Profils joueurs et clubs détaillés</li>
+                  <li>Import automatique des statistiques e-Marque</li>
+                  <li>Publication d'offres et candidatures en quelques clics</li>
+                  <li>Feed vidéo, classement et messagerie professionnelle</li>
+                </ul>
+              </article>
+            </div>
+
+            <p className="mt-5 text-sm sm:text-base text-white/80">
+              Pour aller plus loin, consultez aussi notre page dédiée{" "}
+              <a
+                href="/application-suivi-basket"
+                className="font-semibold text-[#F56B1E] underline underline-offset-4 hover:text-[#ff8a47]"
+              >
+                application suivi basket
+              </a>
+              .
+            </p>
           </div>
         </div>
       </section>
@@ -842,12 +842,12 @@ function App() {
               </li>
               <span className="hidden sm:inline">-</span>
               <li className="flex items-center">
-                <span
-                  onClick={() => window._axcb?.showSettings?.()}
+                <a
+                  href="/gestion-cookies"
                   className="hover:text-white cursor-pointer whitespace-nowrap"
                 >
                   Gestion cookies
-                </span>
+                </a>
               </li>
             </ul>
           </div>
